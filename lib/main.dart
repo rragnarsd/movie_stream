@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -15,6 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -30,18 +33,20 @@ class SearchMovie extends StatefulWidget {
 }
 
 class _SearchMovieState extends State<SearchMovie> {
-  late Movies jsonResponse;
+  Movies? jsonResponse;
 
-  Future fetchData() async {
+  Future<Movies>? fetchData() async {
     var response = await http.get(Uri.parse(Constants.baseUrl +
         Constants.popularMovies +
         dotenv.get('API_PARAM') +
         dotenv.get('API_KEY')));
 
     if (response.statusCode == 200) {
-      var jsonResponse = json.decode(response.body);
+      jsonResponse = json.decode(response.body);
+  /*    Map<String, dynamic> jsonResponse = new Map<String, dynamic>.from(json.decode(response.body));*/
       print(jsonResponse);
     }
+    return jsonResponse;
   }
 
   @override
@@ -53,22 +58,30 @@ class _SearchMovieState extends State<SearchMovie> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-        future: fetchData(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: jsonResponse.results.length,
-              itemBuilder: (context, index) {
-                return Text(jsonResponse.results[index].title);
-              },
-            );
-          } else if (snapshot.hasError) {
-            return Text(snapshot.hasError.toString());
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
+      body: Center(
+        child: FutureBuilder<Movies>(
+          future: fetchData(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              print(snapshot.data);
+              return Text('Loading');
+            } else {
+              if (snapshot.hasError) {
+                return Text(snapshot.error.toString());
+              } else {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                      itemCount: snapshot.data!.results.length,
+                      itemBuilder: (context, index) {
+                        return Text(snapshot.data!.results[index].title);
+                      });
+                } else {
+                  return Text('No data');
+                }
+              }
+            }
+          },
+        ),
       ),
     );
   }
