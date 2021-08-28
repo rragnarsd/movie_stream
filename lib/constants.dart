@@ -3,5 +3,6 @@ class Constants {
   static const String popularMovies = '/movie/popular';
   static const String topRatedMovies = '/movie/top_rated';
   static const String upcomingMovies = '/movies/upcoming';
+  static const String searchMovies = '/search/movie';
   static const String imageUrl = 'https://image.tmdb.org/t/p/original';
 }
