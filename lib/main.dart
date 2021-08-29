@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:movie_stream/screens/popular_movies.dart';
+import 'package:movie_stream/screens/movie_category.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: PopularMovies(),
+      home: MovieCategory(),
     );
   }
 }
