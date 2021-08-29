@@ -49,11 +49,11 @@ class _PopularMoviesState extends State<PopularMovies> {
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Row(children: [
               IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.search,
-                    color: Colors.black,
-                  ),
+                onPressed: () {},
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.black,
+                ),
               ),
               CircleAvatar(
                 backgroundImage: NetworkImage(
@@ -68,112 +68,122 @@ class _PopularMoviesState extends State<PopularMovies> {
           padding: const EdgeInsets.symmetric(
             horizontal: 20.0,
           ),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 10.0,
-                ),
-                Row(
-                  children: [
-                    Text('Popular', style: TextStyle(fontSize: 20.0)),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-                    Text('Toprated', style: TextStyle(fontSize: 20.0)),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-                    Text('Upcoming', style: TextStyle(fontSize: 20.0)),
-                  ],
-                ),
-                SizedBox(height: 20.0,),
-                ReusableBuilder(jsonData: jsonData),
-              ]),
-        ),
-      ),
-    );
-  }
-}
-
-class ReusableBuilder extends StatelessWidget {
-  const ReusableBuilder({
-    Key? key,
-    required this.jsonData,
-  }) : super(key: key);
-
-  final Future<MovieResults> jsonData;
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<MovieResults>(
-      future: jsonData,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasData) {
-            print(snapshot.data);
-            return ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: snapshot.data!.results.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: Container(
-                      height: 150.0,
-                      color: Colors.grey.shade200,
-                      child: Row(children: [
-                        Container(
-                          width: 100.0,
-                          child: CachedNetworkImage(
-                            imageUrl: Constants.imageUrl +
-                                snapshot.data!.results[index].posterPath,
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) => Container(
-                              color: Colors.black12,
-                            ),
-                            errorWidget: (context, url, error) => Container(
-                              width: MediaQuery.of(context).size.width * 0.23,
-                              color: Theme.of(context).splashColor,
-                              child: Icon(
-                                Icons.error,
-                                color: Theme.of(context).iconTheme.color,
-                                size: 40.0,
-                              ),
+          child: FutureBuilder<MovieResults>(
+              future: jsonData,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: snapshot.data!.results.length,
+                      itemBuilder: (context, index) {
+                        return Row(children: [
+                          Expanded(
+                            child: Stack(
+                              overflow: Overflow.visible,
+                              fit: StackFit.passthrough,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 40.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey,
+                                    ),
+                                    width: 300,
+                                    height: 150,
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                      width: 260,
+                                      padding: EdgeInsets.only(left: 100),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            snapshot.data!.results[index].title,
+                                            style: TextStyle(fontSize: 20.0),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          SizedBox(
+                                            height: 10.0,
+                                          ),
+                                          Text('Year: ${snapshot.data!.results[index]
+                                              .releaseDate
+                                              .substring(0, 4)}',
+                                            style: TextStyle(fontSize: 16.0),
+                                          ),
+                                          SizedBox(
+                                            height: 10.0,
+                                          ),
+                                          Text(
+                                            snapshot.data!.results[index]
+                                                .voteAverage
+                                                .toString(),
+                                            style: TextStyle(fontSize: 26.0),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 20,
+                                  top: -30,
+                                  height: 220,
+                                  width: 120,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 20.0,
+                                    ),
+                                    child: Container(
+                                      child: CachedNetworkImage(
+                                        imageUrl: Constants.imageUrl +
+                                            snapshot.data!.results[index]
+                                                .posterPath,
+                                        fit: BoxFit.cover,
+                                        placeholder: (context, url) =>
+                                            Container(
+                                          color: Colors.black12,
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.23,
+                                          color: Theme.of(context).splashColor,
+                                          child: Icon(
+                                            Icons.error,
+                                            color: Theme.of(context)
+                                                .iconTheme
+                                                .color,
+                                            size: 40.0,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(snapshot.data!.results[index].title),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            Text(snapshot.data!.results[index].releaseDate),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            Text(snapshot.data!.results[index].voteAverage
-                                .toString())
-                          ],
-                        )
-                      ]),
-                    ),
-                  );
-                });
-          } else if (snapshot.hasError) {
-            print(snapshot.error);
-            return Text('${snapshot.error}');
-          }
-        }
-        return Center(child: CircularProgressIndicator());
-      },
+                          SizedBox(
+                            height: 20.0,
+                          )
+                        ]);
+                      });
+                } else if (snapshot.hasError) {
+                  print(snapshot.error);
+                  return Text('${snapshot.error}');
+                }
+                return Center(child: CircularProgressIndicator());
+              }),
+        ),
+      ),
     );
   }
 }
