@@ -25,102 +25,75 @@ class LandingScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: Padding(
           padding:
-              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 100.0),
+              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Column(
-                children: [
-                  Transform.rotate(
-                    angle: pi / 2.4,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(20.0),
-                          bottomLeft: Radius.circular(20.0),
-                          topLeft: Radius.circular(5.0),
-                          bottomRight: Radius.circular(5.0),
-                        ),
-                        /*boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.1),
-                            spreadRadius: 2,
-                            blurRadius: 6,
-                          )
-                        ],*/
-                        color: Colors.grey,
-                      ),
-                      width: 80.0,
-                      height: 80.0,
-                      child: RotatedBox(
-                          quarterTurns: 3,
-                          child: Icon(
-                            Icons.play_arrow_rounded,
-                            size: 60.0,
-                          ),
-                      ),
+              Transform.rotate(
+                angle: pi / 2.4,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20.0),
+                      bottomLeft: Radius.circular(20.0),
+                      topLeft: Radius.circular(5.0),
+                      bottomRight: Radius.circular(5.0),
                     ),
+                    /*boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        spreadRadius: 2,
+                        blurRadius: 6,
+                      )
+                    ],*/
+                    color: Colors.grey,
                   ),
-                  SizedBox(height: 30.0),
-                  Text(
-                    'MoveiizPLAY',
-                    style: TextStyle(fontSize: 26.0, color: Colors.white),
+                  width: 80.0,
+                  height: 80.0,
+                  child: RotatedBox(
+                      quarterTurns: 3,
+                      child: Icon(
+                        Icons.play_arrow_rounded,
+                        size: 60.0,
+                      ),
                   ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  Container(
-                    child: Text(
-                      'Watch unlimited movies and TV shows anywhere & anytime!',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20.0, color: Colors.white),
-                    ),
-                  ),
-                ],
+                ),
               ),
-              Column(
-                children: [
-                  Container(
-                      width: double.infinity,
-                      height: 50.0,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => AuthScreen()));
-                        },
-                        child: Text(
-                          'Login',
-                          style: TextStyle(color: Colors.black, fontSize: 18.0),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.grey.shade400,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                        ),
-                      ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 50.0,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Register',
-                        style: TextStyle(color: Colors.black, fontSize: 18.0),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.grey.shade400,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
+              SizedBox(height: 30.0),
+              Text(
+                'MoveiizPLAY',
+                style: TextStyle(fontSize: 26.0, color: Colors.white),
+              ),
+              SizedBox(
+                height: 15.0,
+              ),
+              Container(
+                child: Text(
+                  'Watch unlimited movies and TV shows anywhere & anytime!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20.0, color: Colors.white),
+                ),
+              ),
+              SizedBox(height: 30.0,),
+              Container(
+                  width: double.infinity,
+                  height: 50.0,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => AuthScreen()));
+                    },
+                    child: Text(
+                      'Get Started',
+                      style: TextStyle(color: Colors.black, fontSize: 18.0),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.grey.shade400,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
-                  )
-                ],
-              )
+                  ),
+              ),
             ],
           ),
         ),
