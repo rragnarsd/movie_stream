@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:movie_stream/screens/landing_screen.dart';
 import 'package:movie_stream/screens/movie_category.dart';
 
 void main() async {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MovieCategory(),
+      home: /*MovieCategory(),*/ LandingScreen()
     );
   }
 }
