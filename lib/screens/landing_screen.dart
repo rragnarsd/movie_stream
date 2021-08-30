@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_stream/screens/auth_screen.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({Key? key}) : super(key: key);
@@ -40,6 +41,13 @@ class LandingScreen extends StatelessWidget {
                           topLeft: Radius.circular(5.0),
                           bottomRight: Radius.circular(5.0),
                         ),
+                        /*boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 2,
+                            blurRadius: 6,
+                          )
+                        ],*/
                         color: Colors.grey,
                       ),
                       width: 80.0,
@@ -49,7 +57,8 @@ class LandingScreen extends StatelessWidget {
                           child: Icon(
                             Icons.play_arrow_rounded,
                             size: 60.0,
-                          )),
+                          ),
+                      ),
                     ),
                   ),
                   SizedBox(height: 30.0),
@@ -61,7 +70,6 @@ class LandingScreen extends StatelessWidget {
                     height: 15.0,
                   ),
                   Container(
-                    /*width: 300.0,*/
                     child: Text(
                       'Watch unlimited movies and TV shows anywhere & anytime!',
                       textAlign: TextAlign.center,
@@ -70,42 +78,47 @@ class LandingScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            /*  SizedBox(
-                height: 120.0,
-              ),*/
               Column(
                 children: [
                   Container(
                       width: double.infinity,
                       height: 50.0,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => AuthScreen()));
+                        },
                         child: Text(
                           'Login',
-                          style: TextStyle(color: Colors.black, fontSize: 20.0),
+                          style: TextStyle(color: Colors.black, fontSize: 18.0),
                         ),
                         style: ElevatedButton.styleFrom(
-                            primary: Colors.grey.shade400,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0))),
-                      )),
+                          primary: Colors.grey.shade400,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                      ),
+                  ),
                   SizedBox(
                     height: 20.0,
                   ),
                   Container(
-                      width: double.infinity,
-                      height: 50.0,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Register',
-                          style: TextStyle(color: Colors.black, fontSize: 20.0),
+                    width: double.infinity,
+                    height: 50.0,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Register',
+                        style: TextStyle(color: Colors.black, fontSize: 18.0),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey.shade400,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.grey.shade400,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0))),
-                      ),)
+                      ),
+                    ),
+                  )
                 ],
               )
             ],
