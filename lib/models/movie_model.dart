@@ -3,7 +3,7 @@ import 'package:movie_stream/entities/movie_entity.dart';
 class MovieModel extends MovieEntity {
 
   final bool adult;
-  final String backdropPath;
+ /* final String backdropPath;*/
   final List<int> genreIds;
   final int id;
   final String originalTitle;
@@ -18,7 +18,7 @@ class MovieModel extends MovieEntity {
 
   MovieModel({
     required this.adult,
-    required this.backdropPath,
+ /*   required this.backdropPath,*/
     required this.genreIds,
     required this.id,
     required this.originalTitle,
@@ -33,7 +33,7 @@ class MovieModel extends MovieEntity {
   }) : super(
     id: id,
     title: title,
-    backdropPath: backdropPath,
+/*    backdropPath: backdropPath,*/
     posterPath: posterPath,
     releaseDate: releaseDate,
     voteAverage: voteCount,
@@ -43,7 +43,7 @@ class MovieModel extends MovieEntity {
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
         adult: json["adult"],
-        backdropPath: json["backdrop_path"],
+/*        backdropPath: json["backdrop_path"],*/
         genreIds: json['genre_ids'].cast<int>(),
         id: json["id"],
         originalTitle: json["original_title"],
@@ -67,7 +67,7 @@ class MovieModel extends MovieEntity {
     data['release_date'] = this.releaseDate;
     data['original_title'] = this.originalTitle;
     data['genre_ids'] = this.genreIds;
-    data['backdrop_path'] = this.backdropPath;
+/*    data['backdrop_path'] = this.backdropPath;*/
     data['adult'] = this.adult;
     data['overview'] = this.overview;
     data['poster_path'] = this.posterPath;

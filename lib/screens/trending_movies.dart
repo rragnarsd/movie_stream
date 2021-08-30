@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_stream/models/movie_result_model.dart';
-import 'package:movie_stream/screens/movie_category.dart';
 import 'package:movie_stream/service/api_service.dart';
 
 import '../movie_card_ui.dart';

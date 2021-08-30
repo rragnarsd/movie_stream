@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_stream/screens/coming_soon.dart';
 import 'package:movie_stream/screens/popular_movie.dart';
+import 'package:movie_stream/screens/search_screen.dart';
 import 'package:movie_stream/screens/trending_movies.dart';
 
 class MovieCategory extends StatefulWidget {
@@ -27,7 +28,9 @@ class _MovieCategoryState extends State<MovieCategory> {
             leading: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back),),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen()));
+                },
                 icon: Icon(Icons.search, color: Colors.white),
               ),
               Padding(
