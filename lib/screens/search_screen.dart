@@ -20,41 +20,26 @@ class _SearchScreenState extends State<SearchScreen> {
   TextEditingController textController = TextEditingController(text: '');
   late Future<MovieResults> jsonData;
 
-/*
-  Future<MovieResults> searchMovies() async {
-    final response = await http.get(Uri.parse(
-        "https://api.themoviedb.org/3/search/movie?api_key=${dotenv.get('API_KEY')}&query=" +
-            textController.text
-
-        */
-/*Constants.baseUrl +
-        Constants.searchMovies +
-        dotenv.get('API_PARAM') +
-        dotenv.get('API_KEY') + textController.text */ /*
-
-        ));
-
-    if (response.statusCode == 200) {
-      return MovieResults.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to load data');
-    }
-  }
-*/
-
-  Map? mapResponse;
-  List? listOfResponse;
 
   Future<MovieResults> searchMovies() async {
     final response = await http.get(Uri.parse(
         "https://api.themoviedb.org/3/search/movie?api_key=${dotenv.get('API_KEY')}&query=" +
             textController.text));
+
+/*Constants.baseUrl +
+        Constants.searchMovies +
+        dotenv.get('API_PARAM') +
+        dotenv.get('API_KEY') + textController.text
+
+        ));*/
+
     if (response.statusCode == 200) {
       return MovieResults.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load data');
     }
   }
+
 
   @override
   void initState() {

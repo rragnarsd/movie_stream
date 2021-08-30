@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_stream/screens/coming_soon.dart';
 import 'package:movie_stream/screens/popular_movie.dart';
+import 'package:movie_stream/screens/profile_screen.dart';
 import 'package:movie_stream/screens/search_screen.dart';
 import 'package:movie_stream/screens/trending_movies.dart';
 
@@ -35,9 +36,12 @@ class _MovieCategoryState extends State<MovieCategory> {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 20.0, left: 10.0),
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'),
+                child: InkWell(
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'),
+                  ),
+                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()))
                 ),
               ),
             ],
