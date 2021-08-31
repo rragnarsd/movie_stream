@@ -5,14 +5,14 @@ import 'package:movie_stream/service/api_service.dart';
 
 import '../movie_card_ui.dart';
 
-class TrendingMovies extends StatefulWidget {
-  const TrendingMovies({Key? key}) : super(key: key);
+class PopularMovies extends StatefulWidget {
+  const PopularMovies({Key? key}) : super(key: key);
 
   @override
-  _TrendingMoviesState createState() => _TrendingMoviesState();
+  _PopularMoviesState createState() => _PopularMoviesState();
 }
 
-class _TrendingMoviesState extends State<TrendingMovies> {
+class _PopularMoviesState extends State<PopularMovies> {
   late Future<MovieResults> jsonData;
 
   @override
