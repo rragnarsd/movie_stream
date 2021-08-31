@@ -51,15 +51,14 @@ class MovieCardUi extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10.0),
                                     color: Colors.grey.shade400,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.shade600,
-                                      offset: const Offset(0, 0.2),
-                                      blurRadius: 2.0,
-                                      spreadRadius: 0.2,
-                                    )
-                                  ]
-                                ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.shade600,
+                                        offset: const Offset(0, 1.0),
+                                        blurRadius: 5.0,
+                                        spreadRadius: 0.2,
+                                      )
+                                    ]),
                                 width: 300,
                                 height: 150,
                                 alignment: Alignment.center,
@@ -87,10 +86,14 @@ class MovieCardUi extends StatelessWidget {
                                       SizedBox(
                                         height: 10.0,
                                       ),
-                                      Text(
-                                        '${snapshot.data!.results[index].voteAverage.toString()}',
-                                        style: TextStyle(fontSize: 20.0),
-                                      )
+                                      Row(children: [
+                                        Text(
+                                          '${snapshot.data!.results[index].voteAverage.toString()}',
+                                          style: TextStyle(fontSize: 20.0),
+                                        ),
+                                        SizedBox(width: 5.0,),
+                                        Icon(Icons.star, size: 16.0,)
+                                      ])
                                     ],
                                   ),
                                 ),
@@ -106,16 +109,14 @@ class MovieCardUi extends StatelessWidget {
                                   vertical: 20.0,
                                 ),
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.shade400,
-                                          offset: const Offset(0, 4),
-                                          blurRadius: 4.0,
-                                          spreadRadius: 1.0,
-                                        )
-                                      ]
-                                  ),
+                                  decoration: BoxDecoration(boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.shade600,
+                                      offset: const Offset(0, 0.4),
+                                      blurRadius: 5.0,
+                                      spreadRadius: 0.2,
+                                    )
+                                  ]),
                                   child: Hero(
                                     tag: Text('Hero'),
                                     child: CachedNetworkImage(

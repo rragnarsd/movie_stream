@@ -38,9 +38,16 @@ class MovieInfoScreen extends StatelessWidget {
               left: 30,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.grey.shade200,
-                ),
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: Colors.grey.shade200,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade600,
+                        offset: const Offset(0, 0.4),
+                        blurRadius: 10.0,
+                        spreadRadius: 0.2,
+                      )
+                    ]),
                 child: Container(
                   width: 350,
                   height: 250,
@@ -60,13 +67,22 @@ class MovieInfoScreen extends StatelessWidget {
                         SizedBox(
                           height: 10.0,
                         ),
-                        Text(
-                          movie.voteAverage.toString(),
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.w500,
+                        Row(children: [
+                          Text(
+                            movie.voteAverage.toString(),
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+                          Icon(
+                            Icons.star,
+                            size: 16.0,
+                          )
+                        ]),
                         SizedBox(
                           height: 10.0,
                         ),
@@ -83,8 +99,7 @@ class MovieInfoScreen extends StatelessWidget {
               ),
             ),
             Positioned(
-              child: Column(
-                  children: [
+              child: Column(children: [
                 Expanded(
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -100,9 +115,10 @@ class MovieInfoScreen extends StatelessWidget {
                               ),
                             ),
                             color: Colors.grey.shade400,
-                          ), onTap: () {
+                          ),
+                          onTap: () {
                             Navigator.pop(context);
-                        },
+                          },
                         ),
                       ),
                       Expanded(

@@ -5,6 +5,8 @@ import 'package:movie_stream/screens/popular_movie.dart';
 import 'package:movie_stream/screens/profile_screen.dart';
 import 'package:movie_stream/screens/toprated_movies.dart';
 
+import 'home_screen.dart';
+
 class MovieCategory extends StatefulWidget {
   const MovieCategory({Key? key}) : super(key: key);
 
@@ -29,7 +31,9 @@ class _MovieCategoryState extends State<MovieCategory>
         backgroundColor: Colors.black,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          },
           icon: Icon(Icons.arrow_back),
         ),
         actions: [
