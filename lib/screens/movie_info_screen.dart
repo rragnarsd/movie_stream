@@ -38,7 +38,10 @@ class MovieInfoScreen extends StatelessWidget {
               left: 30,
               child: Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.0),
+                      bottomRight: Radius.circular(20.0),
+                    ),
                     color: Colors.grey.shade200,
                     boxShadow: [
                       BoxShadow(

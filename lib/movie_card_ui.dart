@@ -49,7 +49,10 @@ class MovieCardUi extends StatelessWidget {
                               ),
                               child: Container(
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(20.0),
+                                      bottomRight: Radius.circular(20.0),
+                                    ),
                                     color: Colors.grey.shade400,
                                     boxShadow: [
                                       BoxShadow(
@@ -109,7 +112,8 @@ class MovieCardUi extends StatelessWidget {
                                   vertical: 20.0,
                                 ),
                                 child: Container(
-                                  decoration: BoxDecoration(boxShadow: [
+                                  decoration: BoxDecoration(
+                                      boxShadow: [
                                     BoxShadow(
                                       color: Colors.grey.shade600,
                                       offset: const Offset(0, 0.4),
