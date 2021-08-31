@@ -34,7 +34,7 @@ class _MovieCategoryState extends State<MovieCategory>
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 20.0, left: 10.0),
+            padding: const EdgeInsets.only(right: 20.0, left: 10.0, bottom: 10.0),
             child: InkWell(
               child: CircleAvatar(
                 backgroundImage: NetworkImage(
