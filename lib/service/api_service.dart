@@ -58,6 +58,19 @@ Future<MovieResults> fetchNowPlaying() async {
   }
 }
 
+Future<MovieResults> fetchTrailer() async {
+  final response = await http.get(Uri.parse(Constants.baseUrl +
+      Constants.watchTrailer +
+      dotenv.get('API_PARAM') +
+      dotenv.get('API_KEY')));
+
+  if (response.statusCode == 200) {
+    return MovieResults.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to load data');
+  }
+}
+
 
 Future<MovieResults> searchMovies() async {
   final response = await http.get(Uri.parse(Constants.baseUrl +
@@ -71,3 +84,5 @@ Future<MovieResults> searchMovies() async {
     throw Exception('Failed to load data');
   }
 }
+
+
