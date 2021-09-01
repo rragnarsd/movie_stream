@@ -18,10 +18,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Color(0xFF17181F),
+        primaryColor: Color(0xFF6C72CB),
+        splashColor: Color(0xFFCB9C1),
+        iconTheme: IconThemeData(color: Color(0xFF17181f)),
       ),
       home: Scaffold(
-        body: BottomNavigationBar(),
+        body: BottomNavigationBar()
       ),
     );
   }
@@ -79,15 +82,15 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> {
           BottomNavyBarItem(
             icon: Icon(Icons.home),
             title: Text('Home'),
-            activeColor: Colors.red,
-            inactiveColor: Colors.white,
+            activeColor: Color(0xffCB69C1),
+            inactiveColor: Color(0xffEEEDF0),
             textAlign: TextAlign.center,
           ),
           BottomNavyBarItem(
             icon: Icon(Icons.explore),
             title: Text('Explore'),
-            activeColor: Colors.purpleAccent,
-            inactiveColor: Colors.white,
+            activeColor: Color(0xffCB69C1),
+            inactiveColor: Color(0xffEEEDF0),
             textAlign: TextAlign.center,
           ),
           BottomNavyBarItem(
@@ -97,8 +100,8 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> {
                   'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'),
             ),
             title: Text('Profile'),
-            activeColor: Colors.blue,
-            inactiveColor: Colors.white,
+            activeColor: Color(0xffCB69C1),
+            inactiveColor: Color(0xffEEEDF0),
             textAlign: TextAlign.center,
           ),
         ],

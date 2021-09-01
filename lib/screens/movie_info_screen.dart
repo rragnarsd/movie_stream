@@ -17,7 +17,7 @@ class MovieInfoScreen extends StatelessWidget {
           children: [
             Positioned(
               child: Container(
-                color: Colors.white,
+                color: Color(0xff17181f),
               ),
             ),
             Positioned(
@@ -42,13 +42,13 @@ class MovieInfoScreen extends StatelessWidget {
                       topLeft: Radius.circular(20.0),
                       bottomRight: Radius.circular(20.0),
                     ),
-                    color: Colors.grey.shade200,
+                    color: Color(0xff2d2f3c),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.shade600,
-                        offset: const Offset(0, 0.4),
-                        blurRadius: 10.0,
-                        spreadRadius: 0.2,
+                        color: Colors.grey.shade900,
+                        offset: const Offset(0, 1.0),
+                        blurRadius: 5.0,
+                        spreadRadius: 0.0,
                       )
                     ]),
                 child: Container(
@@ -62,10 +62,7 @@ class MovieInfoScreen extends StatelessWidget {
                       children: [
                         Text(
                           movie.title,
-                          style: TextStyle(
-                            fontSize: 22.0,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style: TextStyle(fontSize: 22.0, color: Color(0xffEEEDF0), fontWeight: FontWeight.w500, letterSpacing: 1.0),
                         ),
                         SizedBox(
                           height: 10.0,
@@ -76,6 +73,7 @@ class MovieInfoScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.w500,
+                              color: Color(0xffeeedf0)
                             ),
                           ),
                           SizedBox(
@@ -84,6 +82,7 @@ class MovieInfoScreen extends StatelessWidget {
                           Icon(
                             Icons.star,
                             size: 16.0,
+                            color: Color(0xffcb69c1),
                           )
                         ]),
                         SizedBox(
@@ -91,7 +90,7 @@ class MovieInfoScreen extends StatelessWidget {
                         ),
                         Text(
                           movie.overview,
-                          style: TextStyle(fontSize: 16.0),
+                          style: TextStyle(fontSize: 16.0, color: Color(0xffeeedf0)),
                           maxLines: 6,
                           overflow: TextOverflow.ellipsis,
                         )
@@ -111,13 +110,15 @@ class MovieInfoScreen extends StatelessWidget {
                         child: InkWell(
                           child: Container(
                             child: Padding(
-                              padding: const EdgeInsets.all(20.0),
+                              padding: const EdgeInsets.symmetric(vertical: 15.0),
                               child: Text(
                                 'Go Back',
                                 textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 18.0, color: Color(0xff17181f), letterSpacing: 1.0, fontWeight: FontWeight.w500),
                               ),
                             ),
-                            color: Colors.grey.shade400,
+                            color: Color(0xffEEEDF0),
+                            /*color: Colors.grey.shade400,*/
                           ),
                           onTap: () {
                             Navigator.pop(context);
@@ -127,13 +128,14 @@ class MovieInfoScreen extends StatelessWidget {
                       Expanded(
                         child: Container(
                           child: Padding(
-                            padding: const EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.symmetric(vertical: 15.0),
                             child: Text(
                               'Continue',
                               textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 18.0, color: Color(0xffeeedf0), letterSpacing: 1.0, fontWeight: FontWeight.w500),
                             ),
                           ),
-                          color: Colors.grey.shade600,
+                          color: Color(0xff6c72cb)
                         ),
                       )
                     ],

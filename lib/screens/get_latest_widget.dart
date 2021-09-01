@@ -29,7 +29,7 @@ class _GetLatestState extends State<GetLatest> {
       Container(
           child: Text(
         'Get Latest',
-        style: TextStyle(fontSize: 20.0),
+            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500, letterSpacing: 1.0, color: Color(0xfff5f5f5)),
       )),
       Container(
         height: 290.0,
@@ -57,10 +57,10 @@ class _GetLatestState extends State<GetLatest> {
                                     ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.grey.shade600,
-                                        offset: const Offset(0, 0.4),
-                                        blurRadius: 5.0,
-                                        spreadRadius: 0.2,
+                                        color: Colors.grey.shade900,
+                                        offset: const Offset(0, 2),
+                                        blurRadius: 4.0,
+                                        spreadRadius: 0.0,
                                       )
                                     ]
                                 ),

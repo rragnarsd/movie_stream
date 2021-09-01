@@ -34,9 +34,9 @@ class _MovieCategoryState extends State<MovieCategory>
               controller: _tabController,
               indicatorSize: TabBarIndicatorSize.label,
               indicatorWeight: 2,
-              indicatorColor: Colors.black,
-              labelColor: Colors.black,
-              unselectedLabelColor: Colors.black,
+              indicatorColor: Color(0xffCB69C1),
+              labelColor: Color(0xfff5f5f5),
+              unselectedLabelColor: Color(0xfff5f5f5),
               tabs: [
                 Tab(
                   text: 'Popular Movies',

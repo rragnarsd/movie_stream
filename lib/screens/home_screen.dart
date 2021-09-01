@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:movie_stream/screens/get_latest_widget.dart';
 import 'package:movie_stream/screens/movie_category.dart';
 import 'package:movie_stream/screens/now_playing_widget.dart';
-import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -34,7 +33,8 @@ class HomeScreen extends StatelessWidget {
                     width: double.infinity,
                     height: 50.0,
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.black),
+                      style:
+                          ElevatedButton.styleFrom(primary: Color(0xFFEEEdF0)),
                       onPressed: () {
                         Navigator.push(
                             context,
@@ -44,7 +44,11 @@ class HomeScreen extends StatelessWidget {
                       },
                       child: Text(
                         'Explore All',
-                        style: TextStyle(fontSize: 18.0),
+                        style: TextStyle(
+                            fontSize: 18.0,
+                            color: Color(0xff17181f),
+                            letterSpacing: 1.0,
+                            fontWeight: FontWeight.w600),
                       ),
                     ),
                   ),

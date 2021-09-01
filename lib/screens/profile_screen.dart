@@ -8,58 +8,59 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 80.0,
-        horizontal: 20.0),
-        child: Column(
-          children: [
-            CircleAvatar(
-              radius: 50.0,
-              backgroundImage: NetworkImage(
-                  'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'),
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            Text(
-              'George Albert',
-              style: TextStyle(fontSize: 20.0),
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            Text(
-              'georgealbert@gmail.com',
-              style: TextStyle(fontSize: 16.0),
-            ),
-            SizedBox(
-              height: 40.0,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ProfileCard(
-                  text: 'Favorite',
-                  icon: Icons.favorite,
-                ),
-                ProfileCard(
-                  text: 'History',
-                  icon: Icons.history,
-                ),
-                ProfileCard(
-                  text: 'Bookmark',
-                  icon: Icons.bookmark,
-                ),
-              ],
-            ),
-            SizedBox(height: 40.0,),
-            ProfileTile(
-              text: 'Update Profile',
-            ),
-            SizedBox(height: 10.0,),
-            ProfileTile(
-              text: 'Notifications',
-            ),
-          ],
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 70.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              CircleAvatar(
+                radius: 50.0,
+                backgroundImage: NetworkImage(
+                    'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                'George Albert',
+                style: TextStyle(fontSize: 20.0, color: Color(0xffeeedf0), fontWeight: FontWeight.w400, letterSpacing: 1.0),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                'georgealbert@gmail.com',
+                style: TextStyle(fontSize: 16.0, color: Color(0xffeeedf0), fontWeight: FontWeight.w400, letterSpacing: 1.0),
+              ),
+              SizedBox(
+                height: 40.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ProfileCard(
+                    text: 'Favorite',
+                    icon: Icons.favorite,
+                  ),
+                  ProfileCard(
+                    text: 'History',
+                    icon: Icons.history,
+                  ),
+                  ProfileCard(
+                    text: 'Bookmark',
+                    icon: Icons.bookmark,
+                  ),
+                ],
+              ),
+              SizedBox(height: 40.0,),
+              ProfileTile(
+                text: 'Update Profile',
+              ),
+              SizedBox(height: 10.0,),
+              ProfileTile(
+                text: 'Notifications',
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -75,16 +76,14 @@ class ProfileTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: InkWell(
-        splashColor: Theme.of(context).splashColor,
+        /*splashColor: Theme.of(context).splashColor,*/
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            shape: BoxShape.rectangle,
-            color: Colors.grey.shade400
           ),
-          child: ListTile(
-              title: Text(text),
-              trailing: Icon(Icons.chevron_right),
+          child: ListTile(tileColor: Color(0xff2d2f3c),
+              title: Text(text, style: TextStyle(color: Color(0xddeeedf0), letterSpacing: 1.0, fontWeight: FontWeight.w500),),
+              trailing: Icon(Icons.chevron_right, color: Color(0xddeeedf0),),
               onTap: () => {}),
         ),
       ),
@@ -102,30 +101,23 @@ class ProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 110.0,
+      height: 110.0,
       decoration: BoxDecoration(
-        color: Colors.grey.shade400,
+        color: Color(0xff2d2f3c),
         borderRadius: BorderRadius.circular(5.0),
         shape: BoxShape.rectangle,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Container(
-          decoration: BoxDecoration(
-            //ath
-            color: Colors.grey.shade400,
-            shape: BoxShape.circle,
+        padding: const EdgeInsets.symmetric(vertical: 20.0),
+        child: Column(children: [
+          Icon(
+            icon,
+            size: 40.0,
+            color: Color(0xffeeedf0),
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(children: [
-              Icon(
-                icon,
-                size: 40.0,
-              ),
-              Text(text)
-            ]),
-          ),
-        ),
+          SizedBox(height: 5.0,),
+          Text(text, style: TextStyle(color: Color(0xffcb69c1), letterSpacing: 1.0),)
+        ]),
       ),
     );
   }

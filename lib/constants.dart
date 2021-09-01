@@ -4,7 +4,6 @@ class Constants {
   static const String topRatedMovies = '/movie/top_rated';
   static const String upcomingMovies = '/movie/upcoming';
   static const String nowPlaying = '/movie/now_playing';
-  static const String watchTrailer = '/movie/120/videos';
   static const String searchMovies = '/search/movie&query=';
   static const String getReviews = '/movie/index/reviews';
   static const String imageUrl = 'https://image.tmdb.org/t/p/original';
