@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_stream/models/movie_result_model.dart';
-import 'package:movie_stream/screens/profile_screen.dart';
 import 'package:movie_stream/service/api_service.dart';
 
 import '../constants.dart';
