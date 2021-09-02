@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:movie_stream/constants.dart';
 import 'package:movie_stream/models/movie_model.dart';
 
+import '../style_constants.dart';
+
 class MovieInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -37,20 +39,7 @@ class MovieInfoScreen extends StatelessWidget {
               top: 280,
               left: 30,
               child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20.0),
-                      bottomRight: Radius.circular(20.0),
-                    ),
-                    color: Color(0xff2d2f3c),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.shade900,
-                        offset: const Offset(0, 1.0),
-                        blurRadius: 5.0,
-                        spreadRadius: 0.0,
-                      )
-                    ]),
+                decoration: kBorderRadiusWithShadows,
                 child: Container(
                   width: 350,
                   height: 250,
@@ -62,7 +51,7 @@ class MovieInfoScreen extends StatelessWidget {
                       children: [
                         Text(
                           movie.title,
-                          style: TextStyle(fontSize: 22.0, color: Color(0xffEEEDF0), fontWeight: FontWeight.w500, letterSpacing: 1.0),
+                          style: kTextStyleMedium
                         ),
                         SizedBox(
                           height: 10.0,
@@ -70,11 +59,7 @@ class MovieInfoScreen extends StatelessWidget {
                         Row(children: [
                           Text(
                             movie.voteAverage.toString(),
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xffeeedf0)
-                            ),
+                            style: kTextStyleSmall.copyWith(color: Color(0xffEEEEEE))
                           ),
                           SizedBox(
                             width: 5.0,
@@ -82,7 +67,7 @@ class MovieInfoScreen extends StatelessWidget {
                           Icon(
                             Icons.star,
                             size: 16.0,
-                            color: Color(0xffcb69c1),
+                            color: Color(0xffBD4B4B),
                           )
                         ]),
                         SizedBox(
@@ -90,7 +75,7 @@ class MovieInfoScreen extends StatelessWidget {
                         ),
                         Text(
                           movie.overview,
-                          style: TextStyle(fontSize: 16.0, color: Color(0xffeeedf0)),
+                          style: kTextStyleXSmall.copyWith(fontSize: 16.0),
                           maxLines: 6,
                           overflow: TextOverflow.ellipsis,
                         )
@@ -114,11 +99,10 @@ class MovieInfoScreen extends StatelessWidget {
                               child: Text(
                                 'Go Back',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 18.0, color: Color(0xff17181f), letterSpacing: 1.0, fontWeight: FontWeight.w500),
+                               style: kTextStyleMedium.copyWith(fontSize: 18.0, color: Color(0xff17181f)),
                               ),
                             ),
-                            color: Color(0xffEEEDF0),
-                            /*color: Colors.grey.shade400,*/
+                            color: Color(0xffEEEEEE),
                           ),
                           onTap: () {
                             Navigator.pop(context);
@@ -132,10 +116,10 @@ class MovieInfoScreen extends StatelessWidget {
                             child: Text(
                               'Continue',
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 18.0, color: Color(0xffeeedf0), letterSpacing: 1.0, fontWeight: FontWeight.w500),
+                             style: kTextStyleMedium.copyWith(fontSize: 18.0,),
                             ),
                           ),
-                          color: Color(0xff6c72cb)
+                          color: Color(0xffBD4B4B),
                         ),
                       )
                     ],

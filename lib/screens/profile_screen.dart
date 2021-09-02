@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../style_constants.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
@@ -22,14 +24,14 @@ class ProfileScreen extends StatelessWidget {
               ),
               Text(
                 'George Albert',
-                style: TextStyle(fontSize: 20.0, color: Color(0xffeeedf0), fontWeight: FontWeight.w400, letterSpacing: 1.0),
+              style: kTextStyleMedium.copyWith(fontSize: 20.0, fontWeight: FontWeight.w400),
               ),
               SizedBox(
                 height: 10.0,
               ),
               Text(
                 'georgealbert@gmail.com',
-                style: TextStyle(fontSize: 16.0, color: Color(0xffeeedf0), fontWeight: FontWeight.w400, letterSpacing: 1.0),
+                style: kTextStyleSmall.copyWith(fontSize: 16.0, color: Color(0xffEEEEEE), fontWeight: FontWeight.w400)
               ),
               SizedBox(
                 height: 40.0,
@@ -82,8 +84,8 @@ class ProfileTile extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: ListTile(tileColor: Color(0xff2d2f3c),
-              title: Text(text, style: TextStyle(color: Color(0xddeeedf0), letterSpacing: 1.0, fontWeight: FontWeight.w500),),
-              trailing: Icon(Icons.chevron_right, color: Color(0xddeeedf0),),
+              title: Text(text, style: TextStyle(color: Color(0xffEEEEEE), letterSpacing: 1.0, fontWeight: FontWeight.w500),),
+              trailing: Icon(Icons.chevron_right, color: Color(0xffEEEEEE),),
               onTap: () => {}),
         ),
       ),
@@ -116,7 +118,7 @@ class ProfileCard extends StatelessWidget {
             color: Color(0xffeeedf0),
           ),
           SizedBox(height: 5.0,),
-          Text(text, style: TextStyle(color: Color(0xffcb69c1), letterSpacing: 1.0),)
+          Text(text, style: TextStyle(color: Color(0xffBD4B4B), letterSpacing: 1.0),)
         ]),
       ),
     );

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../style_constants.dart';
+
 class RegisterScreen extends StatefulWidget {
  final Function toggleAuth;
  RegisterScreen({required this.toggleAuth});
@@ -96,9 +98,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 width: double.infinity,
                                 height: 50.0,
                                 child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(primary: Color(0xFF6C72CB)),
+                                  style: ElevatedButton.styleFrom(primary: Color(0xFFBD4B4B)),
                                   onPressed: () {},
-                                  child: Text('Register', style: TextStyle(fontSize: 18.0),),
+                                  child: Text('Register', style: kTextStyleSmall),
                                 ),
                               ),
                               SizedBox(

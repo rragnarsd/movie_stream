@@ -5,6 +5,7 @@ import 'package:movie_stream/models/movie_result_model.dart';
 import 'package:movie_stream/service/api_service.dart';
 
 import '../constants.dart';
+import '../style_constants.dart';
 import 'movie_info_screen.dart';
 
 class GetLatest extends StatefulWidget {
@@ -29,7 +30,7 @@ class _GetLatestState extends State<GetLatest> {
       Container(
           child: Text(
         'Get Latest',
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500, letterSpacing: 1.0, color: Color(0xfff5f5f5)),
+            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500, letterSpacing: 1.0, color: Color(0xfffEEEEEE)),
       )),
       Container(
         height: 290.0,
@@ -50,29 +51,13 @@ class _GetLatestState extends State<GetLatest> {
                                 const EdgeInsets.only(right: 20.0, top: 20.0),
                             child: Stack(fit: StackFit.passthrough, children: [
                               Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20.0),
-                                      bottomRight: Radius.circular(20.0),
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.shade900,
-                                        offset: const Offset(0, 2),
-                                        blurRadius: 4.0,
-                                        spreadRadius: 0.0,
-                                      )
-                                    ]
-                                ),
+                                decoration: kBorderRadiusWithShadows,
                                 child: ClipRRect(
                                   child: CachedNetworkImage(
                                     imageUrl: Constants.imageUrl +
                                         snapshot.data!.results[index].posterPath,
                                   ),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20.0),
-                                    bottomRight: Radius.circular(20.0),
-                                  ),
+                                  borderRadius: kBorderRadiusOnly
                                 ),
                               ),
                               Container(
@@ -90,18 +75,12 @@ class _GetLatestState extends State<GetLatest> {
                                           child: Text(
                                             snapshot.data!.results[index].title,
                                             overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 14.0,
-                                              color: Colors.white,
-                                            ),
+                                            style: kTextStyleXSmall,
                                             textAlign: TextAlign.center,
                                             maxLines: 1,
                                           ),
                                         )),
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20.0),
-                                      bottomRight: Radius.circular(20.0),
-                                    ),
+                                    borderRadius: kBorderRadiusOnly
                                   ))
                             ])),
                       ),
@@ -125,7 +104,7 @@ class _GetLatestState extends State<GetLatest> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircularProgressIndicator(
-                    color: Colors.black,
+                    color: Color(0xffEEEEEE),
                   )
                 ],
               ),

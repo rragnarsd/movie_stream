@@ -5,14 +5,14 @@ import 'package:movie_stream/screens/popular_movie.dart';
 import 'package:movie_stream/screens/toprated_movies.dart';
 
 
-class MovieCategory extends StatefulWidget {
-  const MovieCategory({Key? key}) : super(key: key);
+class MovieTabsCategory extends StatefulWidget {
+  const MovieTabsCategory({Key? key}) : super(key: key);
 
   @override
-  _MovieCategoryState createState() => _MovieCategoryState();
+  _MovieTabsCategoryState createState() => _MovieTabsCategoryState();
 }
 
-class _MovieCategoryState extends State<MovieCategory>
+class _MovieTabsCategoryState extends State<MovieTabsCategory>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -34,8 +34,8 @@ class _MovieCategoryState extends State<MovieCategory>
               controller: _tabController,
               indicatorSize: TabBarIndicatorSize.label,
               indicatorWeight: 2,
-              indicatorColor: Color(0xffCB69C1),
-              labelColor: Color(0xfff5f5f5),
+              indicatorColor: Color(0xffBD4B4B),
+              labelColor: Color(0xffEEEEEE),
               unselectedLabelColor: Color(0xfff5f5f5),
               tabs: [
                 Tab(

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_stream/screens/movie_info_screen.dart';
+import 'package:movie_stream/style_constants.dart';
 
 import 'constants.dart';
 import 'models/movie_result_model.dart';
@@ -48,21 +49,7 @@ class MovieCardUi extends StatelessWidget {
                                 vertical: 40.0,
                               ),
                               child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20.0),
-                                      bottomRight: Radius.circular(20.0),
-                                    ),
-                                    /*color: Color(0xffEEEDF0),*/
-                                    color: Color(0xff2d2f3c),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.shade900,
-                                        offset: const Offset(0, 1.0),
-                                        blurRadius: 5.0,
-                                        spreadRadius: 0.0,
-                                      )
-                                    ]),
+                                decoration: kBorderRadiusWithShadows,
                                 width: 300,
                                 height: 150,
                                 alignment: Alignment.center,
@@ -76,7 +63,7 @@ class MovieCardUi extends StatelessWidget {
                                     children: [
                                       Text(
                                         snapshot.data!.results[index].title,
-                                        style: TextStyle(fontSize: 18.0, color: Color(0xffEEEDF0), fontWeight: FontWeight.w500, letterSpacing: 1.0),
+                                        style: kTextStyleMedium.copyWith(fontSize: 18.0),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -85,7 +72,8 @@ class MovieCardUi extends StatelessWidget {
                                       ),
                                       Text(
                                         'Year: ${snapshot.data!.results[index].releaseDate.substring(0, 4)}',
-                                        style: TextStyle(fontSize: 14.0, color: Colors.grey.shade600, letterSpacing: 1.0),
+                                        style: kTextStyleXSmall.copyWith(color: Colors.grey.shade600, letterSpacing: 1.0)
+                                        /*style: TextStyle(fontSize: 14.0, color: Colors.grey.shade600, letterSpacing: 1.0),*/
                                       ),
                                       SizedBox(
                                         height: 10.0,
@@ -93,10 +81,10 @@ class MovieCardUi extends StatelessWidget {
                                       Row(children: [
                                         Text(
                                           '${snapshot.data!.results[index].voteAverage.toString()}',
-                                          style: TextStyle(fontSize: 20.0, color: Color(0xffEEEDF0)),
+                                          style: TextStyle(fontSize: 20.0, color: Color(0xffEEEEEE),),
                                         ),
                                         SizedBox(width: 5.0,),
-                                        Icon(Icons.star, size: 16.0, color: Color(0xffcb69c1))
+                                        Icon(Icons.star, size: 16.0, color: Color(0xffBD4B4B))
                                       ])
                                     ],
                                   ),
@@ -168,7 +156,7 @@ class MovieCardUi extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircularProgressIndicator(
-                  color: Color(0xffEEEDF0),
+                    color: Color(0xffEEEEEE),
                 )
               ],
             ),

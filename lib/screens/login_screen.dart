@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../style_constants.dart';
+
 class LoginScreen extends StatefulWidget {
 final Function toggleAuth;
 LoginScreen({required this.toggleAuth});
@@ -105,9 +107,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 width: double.infinity,
                                 height: 50.0,
                                 child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(primary: Color(0xFF6C72CB)),
+                                  style: ElevatedButton.styleFrom(primary: Color(0xFFBD4B4B)),
                                   onPressed: () {},
-                                  child: Text('Login', style: TextStyle(fontSize: 18.0),),
+                                  child: Text('Login', style: kTextStyleSmall),
                                 ),
                               ),
                               SizedBox(

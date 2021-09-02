@@ -7,5 +7,4 @@ class Constants {
   static const String searchMovies = '/search/movie&query=';
   static const String getReviews = '/movie/index/reviews';
   static const String imageUrl = 'https://image.tmdb.org/t/p/original';
-
 }

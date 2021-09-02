@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:movie_stream/screens/auth_screen.dart';
 import 'package:movie_stream/screens/home_screen.dart';
-import 'package:movie_stream/screens/movie_category.dart';
+import 'package:movie_stream/screens/landing_screen.dart';
+import 'package:movie_stream/screens/movie_tabs_category.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:movie_stream/screens/profile_screen.dart';
 
@@ -24,7 +26,9 @@ class MyApp extends StatelessWidget {
         iconTheme: IconThemeData(color: Color(0xFF17181f)),
       ),
       home: Scaffold(
-        body: BottomNavigationBar()
+        body: LandingScreen()
+
+        /*BottomNavigationBar()*/
       ),
     );
   }
@@ -64,7 +68,7 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> {
           },
           children: [
             HomeScreen(),
-            MovieCategory(),
+            MovieTabsCategory(),
             ProfileScreen(),
           ],
         ),
@@ -82,14 +86,14 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> {
           BottomNavyBarItem(
             icon: Icon(Icons.home),
             title: Text('Home'),
-            activeColor: Color(0xffCB69C1),
+            activeColor: Color(0xffBD4B4B),
             inactiveColor: Color(0xffEEEDF0),
             textAlign: TextAlign.center,
           ),
           BottomNavyBarItem(
             icon: Icon(Icons.explore),
             title: Text('Explore'),
-            activeColor: Color(0xffCB69C1),
+            activeColor: Color(0xffBD4B4B),
             inactiveColor: Color(0xffEEEDF0),
             textAlign: TextAlign.center,
           ),
@@ -100,7 +104,7 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> {
                   'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'),
             ),
             title: Text('Profile'),
-            activeColor: Color(0xffCB69C1),
+            activeColor: Color(0xffBD4B4B),
             inactiveColor: Color(0xffEEEDF0),
             textAlign: TextAlign.center,
           ),
