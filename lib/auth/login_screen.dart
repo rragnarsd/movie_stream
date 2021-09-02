@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_stream/widgets/reusable_btn.dart';
 
 import '../style_constants.dart';
 
@@ -103,15 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               SizedBox(
                                 height: 20.0,
                               ),
-                              Container(
-                                width: double.infinity,
-                                height: 50.0,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(primary: Color(0xFFBD4B4B)),
-                                  onPressed: () {},
-                                  child: Text('Login', style: kTextStyleSmall),
-                                ),
-                              ),
+                           ReusableButton(btnText: 'Login', btnColor: 0xFFBD4B4B, btnTextColor: 0xffEEEEEE, function: (){}),
                               SizedBox(
                                 height: 20.0,
                               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/reusable_btn.dart';
 import '../style_constants.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -94,15 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               SizedBox(
                                 height: 20.0,
                               ),
-                              Container(
-                                width: double.infinity,
-                                height: 50.0,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(primary: Color(0xFFBD4B4B)),
-                                  onPressed: () {},
-                                  child: Text('Register', style: kTextStyleSmall),
-                                ),
-                              ),
+                              ReusableButton(btnText: 'Register', btnColor: 0xFFBD4B4B, btnTextColor: 0xffEEEEEE, function: (){}),
                               SizedBox(
                                 height: 20.0,
                               ),

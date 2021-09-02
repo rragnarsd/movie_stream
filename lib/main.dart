@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         body: LandingScreen()
 
-        /*BottomNavigationBar()*/
+      /*  BottomNavigationBar()*/
       ),
     );
   }

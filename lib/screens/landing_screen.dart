@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_stream/widgets/reusable_btn.dart';
 import 'package:movie_stream/screens/auth_screen.dart';
 
 import '../style_constants.dart';
@@ -30,7 +31,7 @@ class LandingScreen extends StatelessWidget {
                   angle: pi / 2.4,
                   child: Container(
                     decoration:
-                        kBoxDecorationAll.copyWith(color: Color(0xffEFB7B7)),
+                        kBoxDecorationAll.copyWith(color: Color(0xffEEEEEE)),
                     width: 80.0,
                     height: 80.0,
                     child: RotatedBox(
@@ -44,9 +45,12 @@ class LandingScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 30.0),
-                Text('MoveiizPLAY',
-                    style:
-                        kTextStyleLarge.copyWith(fontWeight: FontWeight.w500)),
+               RichText(text: TextSpan(
+                 children: [
+                   TextSpan(text: 'Moveiiz', style: kTextStyleLarge.copyWith(fontWeight: FontWeight.w400, letterSpacing: 0.5)),
+                   TextSpan(text: 'PLAY', style: kTextStyleLarge.copyWith(fontWeight: FontWeight.w600, color: Color(0xffBD4B4B), letterSpacing: 0.5)),
+                 ]
+               )),
                 SizedBox(
                   height: 15.0,
                 ),
@@ -63,25 +67,13 @@ class LandingScreen extends StatelessWidget {
                 SizedBox(
                   height: 30.0,
                 ),
-                Container(
-                  width: double.infinity,
-                  height: 50.0,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AuthScreen()));
-                    },
-                    child: Text('Get Started', style: kTextStyleSmall),
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xFFBD4B4B),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                  ),
-                ),
+               ReusableButton(btnText: 'Get Started', btnColor: 0xFFBD4B4B, btnTextColor: 0xffEEEEEE, function: () => Navigator.push(
+                 context,
+                 MaterialPageRoute(
+                   builder: (context) => AuthScreen(),
+                 ),
+               ),
+               )
               ],
             ),
           ),

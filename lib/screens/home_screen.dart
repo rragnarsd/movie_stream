@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_stream/screens/get_latest_widget.dart';
+import 'package:movie_stream/widgets/reusable_btn.dart';
+import 'package:movie_stream/widgets/get_latest_widget.dart';
 import 'package:movie_stream/screens/movie_tabs_category.dart';
-import 'package:movie_stream/screens/now_playing_widget.dart';
+import 'package:movie_stream/widgets/now_playing_widget.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../style_constants.dart';
@@ -34,19 +35,15 @@ class HomeScreen extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     height: 50.0,
-                    child: ElevatedButton(
-                      style:
-                          ElevatedButton.styleFrom(primary: Color(0xffbd4b4b),),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MovieTabsCategory(),
-                            ));
-                      },
-                      child: Text(
-                        'Explore All',
-                        style: kTextStyleSmall,
+                    child: ReusableButton(
+                      btnText: 'Explore All',
+                      btnColor: 0xffbd4b4b,
+                      btnTextColor: (0xffEEEEEE),
+                      function: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MovieTabsCategory(),
+                        ),
                       ),
                     ),
                   ),

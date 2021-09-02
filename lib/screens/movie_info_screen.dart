@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_stream/constants.dart';
 import 'package:movie_stream/models/movie_model.dart';
 
+import '../widgets/reusable_btn.dart';
 import '../style_constants.dart';
 
 class MovieInfoScreen extends StatelessWidget {
@@ -49,18 +50,14 @@ class MovieInfoScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          movie.title,
-                          style: kTextStyleMedium
-                        ),
+                        Text(movie.title, style: kTextStyleMedium),
                         SizedBox(
                           height: 10.0,
                         ),
                         Row(children: [
-                          Text(
-                            movie.voteAverage.toString(),
-                            style: kTextStyleSmall.copyWith(color: Color(0xffEEEEEE))
-                          ),
+                          Text(movie.voteAverage.toString(),
+                              style: kTextStyleSmall.copyWith(
+                                  color: Color(0xffEEEEEE))),
                           SizedBox(
                             width: 5.0,
                           ),
@@ -92,36 +89,27 @@ class MovieInfoScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Expanded(
-                        child: InkWell(
-                          child: Container(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 15.0),
-                              child: Text(
-                                'Go Back',
-                                textAlign: TextAlign.center,
-                               style: kTextStyleMedium.copyWith(fontSize: 18.0, color: Color(0xff17181f)),
-                              ),
-                            ),
-                            color: Color(0xffEEEEEE),
+                        child: Container(
+                          child: ReusableButton(
+                            btnText: 'Go Back',
+                            btnTextColor: 0xff17181f,
+                            btnColor: 0xffEEEEEE,
+                            function: () => Navigator.pop(context),
                           ),
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
+                          width: 50.0,
                         ),
                       ),
                       Expanded(
                         child: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15.0),
-                            child: Text(
-                              'Continue',
-                              textAlign: TextAlign.center,
-                             style: kTextStyleMedium.copyWith(fontSize: 18.0,),
-                            ),
+                          child: ReusableButton(
+                            btnText: 'Continue',
+                            btnTextColor: 0xffEEEEEE,
+                            btnColor: 0xffBD4B4B,
+                            function: () => Navigator.pop(context),
                           ),
-                          color: Color(0xffBD4B4B),
+                          width: 50.0,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

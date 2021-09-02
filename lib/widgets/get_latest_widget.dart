@@ -6,7 +6,7 @@ import 'package:movie_stream/service/api_service.dart';
 
 import '../constants.dart';
 import '../style_constants.dart';
-import 'movie_info_screen.dart';
+import '../screens/movie_info_screen.dart';
 
 class GetLatest extends StatefulWidget {
   const GetLatest({Key? key}) : super(key: key);
