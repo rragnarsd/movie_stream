@@ -4,6 +4,8 @@ https://dribbble.com/shots/5529233-Movie-App-Interface-Design-Dark-Theme
 https://dribbble.com/shots/14379133-MoviesWatch-On-Demand-Entertainment-App-Cinema-Tv-Series?utm_source=pinterest&utm_campaign=pinterest_shot&utm_content=MoviesWatch+-+On-Demand+Entertainment+App+%28Cinema%2C+Tv%2C+Series%29&utm_medium=Social_Share
 https://unsplash.com/photos/TgQHWBDA3mM
 
+Colors: #EEEEEE, #EFB7B7, #BD4B4B, #017181F
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_stream/screens/coming_soon.dart';
-import 'package:movie_stream/screens/popular_movie.dart';
-import 'package:movie_stream/screens/toprated_movies.dart';
+import 'package:movie_stream/widgets/coming_soon.dart';
+import 'package:movie_stream/widgets/popular_movie.dart';
+import 'package:movie_stream/widgets/toprated_movies.dart';
 
 
 class MovieTabsCategory extends StatefulWidget {

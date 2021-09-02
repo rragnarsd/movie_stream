@@ -30,7 +30,7 @@ class _GetLatestState extends State<GetLatest> {
       Container(
           child: Text(
         'Get Latest',
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500, letterSpacing: 1.0, color: Color(0xfffEEEEEE)),
+            style: kTextStyleMedium.copyWith(fontSize: 20.0,),
       )),
       Container(
         height: 290.0,

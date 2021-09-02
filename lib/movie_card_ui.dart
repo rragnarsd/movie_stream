@@ -63,7 +63,8 @@ class MovieCardUi extends StatelessWidget {
                                     children: [
                                       Text(
                                         snapshot.data!.results[index].title,
-                                        style: kTextStyleMedium.copyWith(fontSize: 18.0),
+                                        style: kTextStyleMedium.copyWith(
+                                            fontSize: 16.0),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -72,8 +73,9 @@ class MovieCardUi extends StatelessWidget {
                                       ),
                                       Text(
                                         'Year: ${snapshot.data!.results[index].releaseDate.substring(0, 4)}',
-                                        style: kTextStyleXSmall.copyWith(color: Colors.grey.shade600, letterSpacing: 1.0)
-                                        /*style: TextStyle(fontSize: 14.0, color: Colors.grey.shade600, letterSpacing: 1.0),*/
+                                        style: kTextStyleXSmall.copyWith(
+                                            color: Colors.grey.shade600,
+                                            letterSpacing: 1.0),
                                       ),
                                       SizedBox(
                                         height: 10.0,
@@ -81,10 +83,19 @@ class MovieCardUi extends StatelessWidget {
                                       Row(children: [
                                         Text(
                                           '${snapshot.data!.results[index].voteAverage.toString()}',
-                                          style: TextStyle(fontSize: 20.0, color: Color(0xffEEEEEE),),
+                                          style: TextStyle(
+                                            fontSize: 20.0,
+                                            color: Color(0xffEEEEEE),
+                                          ),
                                         ),
-                                        SizedBox(width: 5.0,),
-                                        Icon(Icons.star, size: 16.0, color: Color(0xffBD4B4B))
+                                        SizedBox(
+                                          width: 5.0,
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          size: 16.0,
+                                          color: Color(0xffBD4B4B),
+                                        )
                                       ])
                                     ],
                                   ),
@@ -101,15 +112,7 @@ class MovieCardUi extends StatelessWidget {
                                   vertical: 20.0,
                                 ),
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.shade900,
-                                          offset: const Offset(0, 1.0),
-                                          blurRadius: 5.0,
-                                          spreadRadius: 0.0,
-                                        )
-                                  ]),
+                                  decoration: kOnlyBoxShadow,
                                   child: Hero(
                                     tag: Text('Hero'),
                                     child: CachedNetworkImage(
@@ -156,7 +159,7 @@ class MovieCardUi extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircularProgressIndicator(
-                    color: Color(0xffEEEEEE),
+                  color: Color(0xffEEEEEE),
                 )
               ],
             ),

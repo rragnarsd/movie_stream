@@ -6,25 +6,15 @@ const kTextStyleSmall =
     TextStyle(fontSize: 18.0, letterSpacing: 1.0, fontWeight: FontWeight.w600);
 
 const kTextStyleMedium = TextStyle(
-    fontSize: 22.0,
-    color: Color(0xffEEEEEE),
-    /*color: Color(0xffEEEDF0),*/
-    fontWeight: FontWeight.w500,
-    letterSpacing: 1.0);
+  fontSize: 22.0,
+  color: Color(0xffEEEEEE),
+  fontWeight: FontWeight.w500,
+  letterSpacing: 1.0,
+);
 
-const kTextStyleLarge = TextStyle(fontSize: 26.0, color: Color(0xffEEEEEE));
-
-const kBoxDecorationImage = BoxDecoration(
-  image: DecorationImage(
-    colorFilter: const ColorFilter.mode(
-      Colors.black,
-      /* Colors.black.withOpacity(0.2),*/
-      BlendMode.dstATop,
-    ),
-    image: NetworkImage(
-        'https://images.unsplash.com/photo-1584905066893-7d5c142ba4e1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80'),
-    fit: BoxFit.fitHeight,
-  ),
+const kTextStyleLarge = TextStyle(
+  fontSize: 26.0,
+  color: Color(0xffEEEEEE),
 );
 
 const kBoxDecorationAll = BoxDecoration(
@@ -34,13 +24,14 @@ const kBoxDecorationAll = BoxDecoration(
     topLeft: Radius.circular(5.0),
     bottomRight: Radius.circular(5.0),
   ),
-  /*boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
-                        spreadRadius: 2,
-                        blurRadius: 6,
-                      )
-                    ],*/
+  boxShadow: [
+    BoxShadow(
+      color: Color(0xFF17181F),
+      offset: const Offset(0, 2),
+      blurRadius: 5.0,
+      spreadRadius: 1.0,
+    )
+  ],
   color: Colors.grey,
 );
 
@@ -52,9 +43,9 @@ const kBorderRadiusWithShadows = BoxDecoration(
     color: Color(0xff2d2f3c),
     boxShadow: [
       BoxShadow(
-        color: Color(0xff2d2f3c),
-        offset: const Offset(0, 2),
-        blurRadius: 2.0,
+        color: Color(0xFF17181F),
+        offset: const Offset(2, 4),
+        blurRadius: 5.0,
         spreadRadius: 1.0,
       )
     ]);
@@ -64,3 +55,11 @@ const kBorderRadiusOnly = BorderRadius.only(
   bottomRight: Radius.circular(20.0),
 );
 
+const kOnlyBoxShadow = BoxDecoration(boxShadow: [
+  BoxShadow(
+    color: Color(0xFF17181F),
+    offset: const Offset(0, 2),
+    blurRadius: 5.0,
+    spreadRadius: 1.0,
+  )
+]);

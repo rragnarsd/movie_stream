@@ -1,12 +1,15 @@
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_stream/screens/home_screen.dart';
+import 'package:movie_stream/screens/profile_screen.dart';
+import 'package:movie_stream/widgets/logo_auth.dart';
+import 'package:movie_stream/widgets/movie_tabs_category.dart';
 import 'package:movie_stream/widgets/reusable_btn.dart';
 
-import '../style_constants.dart';
-
 class LoginScreen extends StatefulWidget {
-final Function toggleAuth;
-LoginScreen({required this.toggleAuth});
+  final Function toggleAuth;
+  LoginScreen({required this.toggleAuth});
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -70,7 +73,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
                                       borderSide: BorderSide(
-                                          color: Colors.grey.shade400)),
+                                          color: Colors.grey.shade400,
+                                      ),
+                                  ),
                                 ),
                               ),
                               SizedBox(
@@ -86,9 +91,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                     borderSide: BorderSide.none,
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide(
-                                          color: Colors.grey.shade400),),
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide:
+                                        BorderSide(color: Colors.grey.shade400,
+                                        ),
+                                  ),
                                 ),
                               ),
                               SizedBox(
@@ -104,7 +111,17 @@ class _LoginScreenState extends State<LoginScreen> {
                               SizedBox(
                                 height: 20.0,
                               ),
-                           ReusableButton(btnText: 'Login', btnColor: 0xFFBD4B4B, btnTextColor: 0xffEEEEEE, function: (){}),
+                              ReusableButton(
+                                  btnText: 'Login',
+                                  btnColor: 0xFFBD4B4B,
+                                  btnTextColor: 0xffEEEEEE,
+                                  function: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => BottomNavigationBar()),
+                                    );
+                                  },
+                              ),
                               SizedBox(
                                 height: 20.0,
                               ),
@@ -122,7 +139,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Text(
                                       'Register',
                                       style: TextStyle(
-                                          fontWeight: FontWeight.w600),
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -134,29 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    height: 50,
-                    width: 200.0,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            blurRadius: 6,
-                            offset: Offset(0, 2),
-                          )
-                        ]),
-                    child: Center(
-                      child: Text(
-                        'MoveiizPLAY',
-                        style: TextStyle(fontSize: 18.0),
-                      ),
-                    ),
-                  ),
-                ),
+                LogoAuth(),
               ],
             ),
           ],
@@ -165,3 +161,85 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
+class BottomNavigationBar extends StatefulWidget {
+  const BottomNavigationBar({Key? key}) : super(key: key);
+
+  @override
+  _BottomNavigationBarState createState() => _BottomNavigationBarState();
+}
+
+class _BottomNavigationBarState extends State<BottomNavigationBar> {
+  int _currentIndex = 0;
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SizedBox.expand(
+        child: PageView(
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(() => _currentIndex = index);
+          },
+          children: [
+            HomeScreen(),
+            MovieTabsCategory(),
+            ProfileScreen(),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomNavyBar(
+        itemCornerRadius: 10.0,
+        backgroundColor: Colors.black,
+        selectedIndex: _currentIndex,
+        onItemSelected: (index) {
+          setState(() => _currentIndex = index);
+          _pageController.animateToPage(index,
+              duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+        },
+        items: [
+          BottomNavyBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+            activeColor: Color(0xffBD4B4B),
+            inactiveColor: Color(0xffEEEDF0),
+            textAlign: TextAlign.center,
+          ),
+          BottomNavyBarItem(
+            icon: Icon(Icons.explore),
+            title: Text('Explore'),
+            activeColor: Color(0xffBD4B4B),
+            inactiveColor: Color(0xffEEEDF0),
+            textAlign: TextAlign.center,
+          ),
+          BottomNavyBarItem(
+            icon: CircleAvatar(
+              radius: 15,
+              backgroundImage: NetworkImage(
+                  'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'),
+            ),
+            title: Text('Profile'),
+            activeColor: Color(0xffBD4B4B),
+            inactiveColor: Color(0xffEEEDF0),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+

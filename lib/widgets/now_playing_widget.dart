@@ -30,7 +30,7 @@ class _GetLatestWidgetState extends State<GetLatestWidget> {
       Container(
         child: Text(
           'Now Playing',
-          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500, letterSpacing: 1.0, color: Color(0xfffEEEEEE)),
+        style: kTextStyleMedium.copyWith(fontSize: 20.0,),
         ),
       ),
       Container(
@@ -73,7 +73,8 @@ class _GetLatestWidgetState extends State<GetLatestWidget> {
                                     child: Text(
                                       snapshot.data!.results[index].title,
                                       style: kTextStyleXSmall.copyWith(fontSize: 18.0)
-                                    )),
+                                    ),
+                                ),
                                 borderRadius: kBorderRadiusOnly
                               ),
                             )

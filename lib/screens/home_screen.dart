@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_stream/widgets/reusable_btn.dart';
 import 'package:movie_stream/widgets/get_latest_widget.dart';
-import 'package:movie_stream/screens/movie_tabs_category.dart';
+import 'package:movie_stream/widgets/movie_tabs_category.dart';
 import 'package:movie_stream/widgets/now_playing_widget.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../style_constants.dart';
+import '../youtube_video.dart';
+
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -33,8 +33,6 @@ class HomeScreen extends StatelessWidget {
                     height: 40.0,
                   ),
                   Container(
-                    width: double.infinity,
-                    height: 50.0,
                     child: ReusableButton(
                       btnText: 'Explore All',
                       btnColor: 0xffbd4b4b,
@@ -60,58 +58,3 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class Video extends StatefulWidget {
-  final url;
-
-  Video({this.url});
-
-  @override
-  _VideoState createState() => _VideoState();
-}
-
-class _VideoState extends State<Video> {
-  late YoutubePlayerController controller;
-
-  void runYouTubePlayer() {
-    controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(
-              'https://www.youtube.com/watch?v=BDSa0JhIUMI&t=19s')
-          .toString(),
-      flags: YoutubePlayerFlags(
-        enableCaption: false,
-        isLive: false,
-        autoPlay: false,
-        mute: false,
-      ),
-    );
-  }
-
-  @override
-  void initState() {
-    runYouTubePlayer();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  void deactivate() {
-    controller.pause();
-    super.deactivate();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return YoutubePlayerBuilder(
-        player: YoutubePlayer(
-          controller: controller,
-        ),
-        builder: (context, player) {
-          return Container(child: player);
-        });
-  }
-}

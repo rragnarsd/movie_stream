@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_stream/widgets/logo_auth.dart';
 
 import '../widgets/reusable_btn.dart';
-import '../style_constants.dart';
 
 class RegisterScreen extends StatefulWidget {
  final Function toggleAuth;
@@ -126,29 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    height: 50,
-                    width: 200.0,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            blurRadius: 6,
-                            offset: Offset(0, 2),
-                          )
-                        ]),
-                    child: Center(
-                      child: Text(
-                        'MoveiizPLAY',
-                        style: TextStyle(fontSize: 18.0),
-                      ),
-                    ),
-                  ),
-                ),
+               LogoAuth(),
               ],
             ),
           ],
