@@ -1,13 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_stream/models/movie_model.dart';
+import 'package:movie_stream/provider.dart';
 import 'package:movie_stream/screens/movie_info_screen.dart';
 import 'package:movie_stream/style_constants.dart';
+import 'package:provider/provider.dart';
 
 import 'constants.dart';
 import 'models/movie_result_model.dart';
 
-class MovieCardUi extends StatelessWidget {
+class MovieCardUi extends StatefulWidget {
   const MovieCardUi({
     Key? key,
     required this.jsonData,
@@ -16,9 +19,18 @@ class MovieCardUi extends StatelessWidget {
   final Future<MovieResults> jsonData;
 
   @override
+  _MovieCardUiState createState() => _MovieCardUiState();
+}
+
+class _MovieCardUiState extends State<MovieCardUi> {
+  bool _isFavorite = true;
+
+  @override
   Widget build(BuildContext context) {
+    var movieProvider = Provider.of<MovieProvider>(context);
+
     return FutureBuilder<MovieResults>(
-        future: jsonData,
+        future: widget.jsonData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
@@ -141,6 +153,52 @@ class MovieCardUi extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            Positioned(
+                              right: 10.0,
+                              top: 30.0,
+                              child: InkWell(
+                                  child: Icon(
+                                    _isFavorite
+                                        ? Icons.favorite_outline
+                                        : Icons.favorite,
+                                    color: Colors.red,
+                                    size: 30.0,
+                                  ),
+                                  onTap: () {
+                                    movieProvider.addCount();
+                                    MovieModel movieModel = new MovieModel(
+                                        adult:
+                                            snapshot.data!.results[index].adult,
+                                        genreIds: snapshot
+                                            .data!.results[index].genreIds,
+                                        id: snapshot.data!.results[index].id,
+                                        originalTitle: snapshot
+                                            .data!.results[index].originalTitle,
+                                        overview: snapshot
+                                            .data!.results[index].overview,
+                                        popularity: snapshot
+                                            .data!.results[index].popularity,
+                                        posterPath: snapshot
+                                            .data!.results[index].posterPath,
+                                        releaseDate: snapshot
+                                            .data!.results[index].releaseDate,
+                                        title:
+                                            snapshot.data!.results[index].title,
+                                        video:
+                                            snapshot.data!.results[index].video,
+                                        voteAverage: snapshot
+                                            .data!.results[index].voteAverage,
+                                        voteCount: snapshot
+                                            .data!.results[index].voteCount,
+                                    );
+                                    movieProvider.addMovie(movieModel);
+
+                                    setState(() {
+                                      _isFavorite = !_isFavorite;
+                                    /* movieProvider.movieList[index] != _isFavorite ? Icon(Icons.favorite) : Icon(Icons.favorite_outline);*/
+                                    });
+                                  }),
+                            )
                           ],
                         ),
                       ),

@@ -51,7 +51,9 @@ class MovieInfoScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(movie.title, style: kTextStyleMedium),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [Text(movie.title, style: kTextStyleMedium), Icon(Icons.favorite)]),
                         SizedBox(
                           height: 10.0,
                         ),
