@@ -9,6 +9,7 @@ import 'package:movie_stream/widgets/reusable_btn.dart';
 
 class LoginScreen extends StatefulWidget {
   final Function toggleAuth;
+
   LoginScreen({required this.toggleAuth});
 
   @override
@@ -16,8 +17,33 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+/*  Color _colorText = Colors.black54;*/
+/*  late FocusNode _focusNode;*/
+  bool _isHidden = true;
+
+/*  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _focusNode.dispose();
+  }*/
+
+  void togglePassword() {
+    setState(() {
+      _isHidden = !_isHidden;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    //https://stackoverflow.com/questions/56411599/flutter-textformfield-change-labelcolor-on-focus
+/*    var _defaultColor = Colors.black54;
+    var _focusedColor = Theme.of(context).primaryColor;*/
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -62,8 +88,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               TextFormField(
+                                keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
-                                  labelText: 'Email',
+                                  contentPadding: EdgeInsets.all(20.0),
+                                  hintText: 'Email',
                                   prefixIcon: Icon(Icons.mail),
                                   filled: true,
                                   enabledBorder: UnderlineInputBorder(
@@ -71,10 +99,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     borderSide: BorderSide.none,
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide(
-                                          color: Colors.grey.shade400,
-                                      ),
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: Colors.grey.shade400,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -82,9 +110,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: 20.0,
                               ),
                               TextFormField(
+                                obscureText: _isHidden,
+                                keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
-                                  labelText: 'Password',
+                                  contentPadding: EdgeInsets.all(20.0),
+                                  hintText: 'Password',
                                   prefixIcon: Icon(Icons.lock),
+                                  suffixIcon: InkWell(
+                                    child: Icon(_isHidden ? Icons.visibility : Icons.visibility_off),
+                                    onTap: togglePassword,
+                                  ),
                                   filled: true,
                                   enabledBorder: UnderlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
@@ -92,9 +127,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
-                                    borderSide:
-                                        BorderSide(color: Colors.grey.shade400,
-                                        ),
+                                    borderSide: BorderSide(
+                                      color: Colors.grey.shade400,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -112,15 +147,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: 20.0,
                               ),
                               ReusableButton(
-                                  btnText: 'Login',
-                                  btnColor: 0xFFBD4B4B,
-                                  btnTextColor: 0xffEEEEEE,
-                                  function: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => BottomNavigationBar()),
-                                    );
-                                  },
+                                btnText: 'Login',
+                                btnColor: 0xFFBD4B4B,
+                                btnTextColor: 0xffEEEEEE,
+                                function: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            BottomNavigationBar(),
+                                    ),
+                                  );
+                                },
                               ),
                               SizedBox(
                                 height: 20.0,
@@ -241,5 +279,3 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> {
     );
   }
 }
-
-

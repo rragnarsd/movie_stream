@@ -5,30 +5,39 @@ import 'package:movie_stream/widgets/logo_auth.dart';
 import '../widgets/reusable_btn.dart';
 
 class RegisterScreen extends StatefulWidget {
- final Function toggleAuth;
- RegisterScreen({required this.toggleAuth});
+  final Function toggleAuth;
+  RegisterScreen({required this.toggleAuth});
 
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  bool isHidden = true;
+
+  void togglePassword() {
+    setState(() {
+      isHidden = !isHidden;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-      return Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: new ColorFilter.mode(
-              Colors.black.withOpacity(0.2),
-              BlendMode.dstATop,
-            ),
-            image: NetworkImage(
-                'https://images.unsplash.com/photo-1485700330317-57a99a571ecb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1275&q=80'),
-            fit: BoxFit.fitHeight,
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          colorFilter: new ColorFilter.mode(
+            Colors.black.withOpacity(0.2),
+            BlendMode.dstATop,
           ),
+          image: NetworkImage(
+              'https://images.unsplash.com/photo-1485700330317-57a99a571ecb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1275&q=80'),
+          fit: BoxFit.fitHeight,
         ),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        resizeToAvoidBottomInset: false,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -58,8 +67,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               TextFormField(
+                                keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
-                                  labelText: 'Email',
+                                  contentPadding: EdgeInsets.all(20.0),
+                                  hintText: 'Email',
                                   prefixIcon: Icon(Icons.mail),
                                   filled: true,
                                   enabledBorder: UnderlineInputBorder(
@@ -67,35 +78,49 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     borderSide: BorderSide.none,
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide(
-                                          color: Colors.grey.shade400)),
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide:
+                                        BorderSide(color: Colors.grey.shade400),
+                                  ),
                                 ),
                               ),
                               SizedBox(
                                 height: 20.0,
                               ),
                               TextFormField(
+                                obscureText: isHidden,
+                                keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
-                                  labelText: 'Password',
+                                  contentPadding: EdgeInsets.all(20.0),
+                                  hintText: 'Password',
                                   prefixIcon: Icon(Icons.lock),
+                                  suffixIcon: InkWell(
+                                    child: Icon(isHidden
+                                        ? Icons.visibility
+                                        : Icons.visibility_off),
+                                    onTap: togglePassword,
+                                  ),
                                   filled: true,
                                   enabledBorder: UnderlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
                                     borderSide: BorderSide.none,
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide(
-                                          color: Colors.grey.shade400,
-                                      ),
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: Colors.grey.shade400,
+                                    ),
                                   ),
                                 ),
                               ),
                               SizedBox(
                                 height: 20.0,
                               ),
-                              ReusableButton(btnText: 'Register', btnColor: 0xFFBD4B4B, btnTextColor: 0xffEEEEEE, function: (){}),
+                              ReusableButton(
+                                  btnText: 'Register',
+                                  btnColor: 0xFFBD4B4B,
+                                  btnTextColor: 0xffEEEEEE,
+                                  function: () {}),
                               SizedBox(
                                 height: 20.0,
                               ),
@@ -113,7 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     child: Text(
                                       'Login',
                                       style: TextStyle(
-                                          fontWeight: FontWeight.w600,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                   ),
@@ -126,12 +151,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
-               LogoAuth(),
+                LogoAuth(),
               ],
             ),
           ],
         ),
-    ),
-      );
+      ),
+    );
   }
 }

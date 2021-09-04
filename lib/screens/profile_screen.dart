@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_stream/screens/landing_screen.dart';
 
 import '../style_constants.dart';
 
@@ -72,13 +73,13 @@ class ProfileScreen extends StatelessWidget {
                 height: 40.0,
               ),
               ProfileTile(
-                text: 'Update Profile',
+                text: 'Notifications',
               ),
               SizedBox(
                 height: 10.0,
               ),
               ProfileTile(
-                text: 'Notifications',
+                text: 'Sign Out',
               ),
             ],
           ),
@@ -115,7 +116,10 @@ class ProfileTile extends StatelessWidget {
               Icons.chevron_right,
               color: Color(0xffEEEEEE),
             ),
-            onTap: () => {},
+            onTap: () =>  Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LandingScreen()),
+            )
           ),
         ),
       ),
