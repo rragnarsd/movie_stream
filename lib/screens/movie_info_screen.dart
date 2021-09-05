@@ -53,14 +53,25 @@ class MovieInfoScreen extends StatelessWidget {
                       children: [
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [Text(movie.title, style: kTextStyleMedium), Icon(Icons.favorite)]),
+                            children: [
+                              Expanded(
+                                child: Text(movie.title,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: kTextStyleMedium),
+                              ),
+                              Icon(Icons.favorite),
+                            ]),
                         SizedBox(
                           height: 10.0,
                         ),
                         Row(children: [
-                          Text(movie.voteAverage.toString(),
-                              style: kTextStyleSmall.copyWith(
-                                  color: Color(0xffEEEEEE))),
+                          Text(
+                            movie.voteAverage.toString(),
+                            style: kTextStyleSmall.copyWith(
+                              color: Color(0xffEEEEEE),
+                            ),
+                          ),
                           SizedBox(
                             width: 5.0,
                           ),
@@ -105,11 +116,13 @@ class MovieInfoScreen extends StatelessWidget {
                       Expanded(
                         child: Container(
                           child: ReusableButton(
-                            btnText: 'Continue',
-                            btnTextColor: 0xffEEEEEE,
-                            btnColor: 0xffBD4B4B,
-                            function: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FavoriteScreen()))
-                          ),
+                              btnText: 'Continue',
+                              btnTextColor: 0xffEEEEEE,
+                              btnColor: 0xffBD4B4B,
+                              function: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => FavoriteScreen()))),
                           width: 50.0,
                         ),
                       ),
