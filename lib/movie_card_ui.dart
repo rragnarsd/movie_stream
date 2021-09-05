@@ -195,7 +195,7 @@ class _MovieCardUiState extends State<MovieCardUi> {
 
                                     setState(() {
                                       _isFavorite = !_isFavorite;
-                                    /* movieProvider.movieList[index] != _isFavorite ? Icon(Icons.favorite) : Icon(Icons.favorite_outline);*/
+                                    /* movieProvider.movieList[index] == _isFavorite ? Icon(Icons.favorite) : Icon(Icons.favorite_outline);*/
                                     });
                                   }),
                             )

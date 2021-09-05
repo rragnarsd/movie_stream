@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_stream/screens/favorite_screen.dart';
 import 'package:movie_stream/screens/landing_screen.dart';
 
 import '../style_constants.dart';
@@ -103,24 +104,23 @@ class ProfileTile extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: ListTile(
-            tileColor: Color(0xff2d2f3c),
-            title: Text(
-              text,
-              style: TextStyle(
-                color: Color(0xffEEEEEE),
-                letterSpacing: 1.0,
-                fontWeight: FontWeight.w400,
+              tileColor: Color(0xff2d2f3c),
+              title: Text(
+                text,
+                style: TextStyle(
+                  color: Color(0xffEEEEEE),
+                  letterSpacing: 1.0,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
-            ),
-            trailing: Icon(
-              Icons.chevron_right,
-              color: Color(0xffEEEEEE),
-            ),
-            onTap: () =>  Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LandingScreen()),
-            )
-          ),
+              trailing: Icon(
+                Icons.chevron_right,
+                color: Color(0xffEEEEEE),
+              ),
+              onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LandingScreen()),
+                  )),
         ),
       ),
     );
@@ -135,27 +135,32 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 110.0,
-      height: 110.0,
-      decoration: kBorderRadiusWithShadows,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20.0),
-        child: Column(children: [
-          Icon(
-            icon,
-            size: 40.0,
-            color: Color(0xffeeedf0),
+    return InkWell(
+        child: Container(
+          width: 110.0,
+          height: 110.0,
+          decoration: kBorderRadiusWithShadows,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Column(children: [
+              Icon(
+                icon,
+                size: 40.0,
+                color: Color(0xffeeedf0),
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              Text(
+                text,
+                style: TextStyle(color: Color(0xffBD4B4B), letterSpacing: 1.0),
+              )
+            ]),
           ),
-          SizedBox(
-            height: 5.0,
-          ),
-          Text(
-            text,
-            style: TextStyle(color: Color(0xffBD4B4B), letterSpacing: 1.0),
-          )
-        ]),
-      ),
-    );
+        ),
+        onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FavoriteScreen()),
+            ));
   }
 }

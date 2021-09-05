@@ -5,6 +5,7 @@ https://dribbble.com/shots/14379133-MoviesWatch-On-Demand-Entertainment-App-Cine
 https://unsplash.com/photos/TgQHWBDA3mM
 
 Colors: #EEEEEE, #EFB7B7, #BD4B4B, #017181F
+Dismissible widget
 
 ## Getting Started
 
