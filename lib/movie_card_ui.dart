@@ -7,7 +7,7 @@ import 'package:movie_stream/screens/movie_info_screen.dart';
 import 'package:movie_stream/style_constants.dart';
 import 'package:provider/provider.dart';
 
-import 'constants.dart';
+import 'service/constants.dart';
 import 'models/movie_result_model.dart';
 
 class MovieCardUi extends StatefulWidget {
@@ -34,8 +34,8 @@ class _MovieCardUiState extends State<MovieCardUi> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: snapshot.data!.results.length,
                 itemBuilder: (context, index) {
                   return InkWell(
@@ -157,47 +157,59 @@ class _MovieCardUiState extends State<MovieCardUi> {
                               right: 10.0,
                               top: 30.0,
                               child: InkWell(
-                                  child: Icon(
-                                    _isFavorite
-                                        ? Icons.favorite_outline
-                                        : Icons.favorite,
-                                    color: Colors.red,
-                                    size: 30.0,
-                                  ),
-                                  onTap: () {
-                                    movieProvider.addCount();
-                                    MovieModel movieModel = new MovieModel(
-                                        adult:
-                                            snapshot.data!.results[index].adult,
-                                        genreIds: snapshot
-                                            .data!.results[index].genreIds,
-                                        id: snapshot.data!.results[index].id,
-                                        originalTitle: snapshot
-                                            .data!.results[index].originalTitle,
-                                        overview: snapshot
-                                            .data!.results[index].overview,
-                                        popularity: snapshot
-                                            .data!.results[index].popularity,
-                                        posterPath: snapshot
-                                            .data!.results[index].posterPath,
-                                        releaseDate: snapshot
-                                            .data!.results[index].releaseDate,
-                                        title:
-                                            snapshot.data!.results[index].title,
-                                        video:
-                                            snapshot.data!.results[index].video,
-                                        voteAverage: snapshot
-                                            .data!.results[index].voteAverage,
-                                        voteCount: snapshot
-                                            .data!.results[index].voteCount,
-                                    );
-                                    movieProvider.addMovie(movieModel);
+                                onTap: () {
+                                  movieProvider.addCount();
+                                  MovieModel movieModel = new MovieModel(
+                                    adult: snapshot.data!.results[index].adult,
+                                    genreIds:
+                                        snapshot.data!.results[index].genreIds,
+                                    id: snapshot.data!.results[index].id,
+                                    originalTitle: snapshot
+                                        .data!.results[index].originalTitle,
+                                    overview:
+                                        snapshot.data!.results[index].overview,
+                                    popularity: snapshot
+                                        .data!.results[index].popularity,
+                                    posterPath: snapshot
+                                        .data!.results[index].posterPath,
+                                    releaseDate: snapshot
+                                        .data!.results[index].releaseDate,
+                                    title: snapshot.data!.results[index].title,
+                                    video: snapshot.data!.results[index].video,
+                                    voteAverage: snapshot
+                                        .data!.results[index].voteAverage,
+                                    voteCount:
+                                        snapshot.data!.results[index].voteCount,
+                                    /* isFavorite: snapshot
+                                        .data!.results[index].isFavorite,*/
+                                  );
+                                  movieProvider.addMovie(movieModel);
 
-                                    setState(() {
-                                      _isFavorite = !_isFavorite;
-                                    /* movieProvider.movieList[index] == _isFavorite ? Icon(Icons.favorite) : Icon(Icons.favorite_outline);*/
-                                    });
-                                  }),
+                                  /*        setState(() {
+                                    snapshot.data!.results[index].isFavorite !=
+                                        _isFavorite;
+                                  });*/
+                                  /*     setState(() {
+                                      movieProvider.movieList[index].isFavorite != false
+                                          ? Icon(Icons.favorite)
+                                          : Icon(Icons.favorite_outline);
+                                    });*/
+
+                                  setState(() {
+                                    _isFavorite = !_isFavorite;
+                                  });
+                                  /*snapshot.data!.results[index].title == _isFavorite ? Icon(Icons.favorite) : Icon(Icons.favorite_outline);*/ /*
+
+                                    });*/
+                                },
+                                child: Icon(
+                                  _isFavorite
+                                      ? Icons.favorite_outline
+                                      : Icons.favorite,
+                                  color: Colors.red,
+                                  size: 30.0,
+                                ),
+                              ),
                             )
                           ],
                         ),

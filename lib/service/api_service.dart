@@ -4,7 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie_stream/models/movie_result_model.dart';
 
-import '../constants.dart';
+import 'constants.dart';
 
 Future<MovieResults> fetchTopRatedMovies() async {
   final response = await http.get(Uri.parse(Constants.baseUrl +

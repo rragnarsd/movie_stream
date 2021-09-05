@@ -13,11 +13,11 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  bool isHidden = true;
+  bool _isHidden = true;
 
   void togglePassword() {
     setState(() {
-      isHidden = !isHidden;
+      _isHidden = !_isHidden;
     });
   }
 
@@ -88,16 +88,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 height: 20.0,
                               ),
                               TextFormField(
-                                obscureText: isHidden,
+                                obscureText: _isHidden,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(20.0),
                                   hintText: 'Password',
                                   prefixIcon: Icon(Icons.lock),
                                   suffixIcon: InkWell(
-                                    child: Icon(isHidden
+                                    child: Icon(_isHidden
                                         ? Icons.visibility
-                                        : Icons.visibility_off),
+                                        : Icons.visibility_off,
+                                    ),
                                     onTap: togglePassword,
                                   ),
                                   filled: true,

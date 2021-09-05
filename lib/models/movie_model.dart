@@ -15,6 +15,7 @@ class MovieModel extends MovieEntity {
   final bool video;
   final double voteAverage;
   final int voteCount;
+  late final bool isFavorite;
 
   MovieModel({
     required this.adult,
@@ -30,6 +31,7 @@ class MovieModel extends MovieEntity {
     required this.video,
     required this.voteAverage,
     required this.voteCount,
+   /* required this.isFavorite*/
   }) : super(
     id: id,
     title: title,
@@ -54,7 +56,8 @@ class MovieModel extends MovieEntity {
         title: json["title"],
         video: json["video"],
         voteAverage: json["vote_average"]?.toDouble() ?? 0.0,
-        voteCount: json["vote_count"]);
+        voteCount: json["vote_count"],
+        /*isFavorite: false*/);
   }
 
   Map<String, dynamic> toJson()  {

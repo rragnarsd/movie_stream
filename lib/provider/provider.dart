@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_stream/models/movie_model.dart';
-import '../models/movie_result_model.dart';
 
 class MovieProvider extends ChangeNotifier {
   int _count = 0;
@@ -14,6 +13,12 @@ class MovieProvider extends ChangeNotifier {
 
   void addMovie(MovieModel data) {
     movieModel.add(data);
+    notifyListeners();
+  }
+
+  void removeMovie(MovieModel data) {
+    movieModel.remove(data);
+    notifyListeners();
   }
 
   int get count {

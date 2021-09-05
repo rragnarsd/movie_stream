@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:movie_stream/provider/provider.dart';
 import 'package:provider/provider.dart';
 
-import '../constants.dart';
+import '../service/constants.dart';
+import '../style_constants.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({Key? key}) : super(key: key);
@@ -38,14 +39,15 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           child: Column(children: [
             ListView.builder(
                 shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: movieProvider.movieModel.length,
                 itemBuilder: (context, index) {
                   final movie = movieProvider.movieModel[index].title;
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 10.0),
                     child: Container(
-                      width: 200.0,
-                      height: 120.0,
+                      decoration: kBorderRadiusWithShadows,
+                      height: 140.0,
                       child: Dismissible(
                         direction: DismissDirection.endToStart,
                         key: Key(movie),
@@ -68,11 +70,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                 Icons.delete,
                                 color: Colors.white,
                               ),
-                            )),
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 10.0),
-                          child: Row(
-                            children: [
+                            ),
+                        ),
+                        child: Row(
+                          children: [
                               CachedNetworkImage(
                                 imageUrl: Constants.imageUrl +
                                     movieProvider.movieModel[index].posterPath,
@@ -89,20 +90,19 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                width: 10.0,
-                              ),
-                              Container(
-                                  width: 200.0,
-                                  child: Text(
-                                    movieProvider.movieModel[index].title,
-                                    style: TextStyle(color: Colors.white, fontSize: 16.0),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                              ),
-                            ],
-                          ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            Container(
+                                width: 200.0,
+                                child: Text(
+                                  movieProvider.movieModel[index].title,
+                                  style: TextStyle(color: Colors.white, fontSize: 16.0),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                            ),
+                          ],
                         ),
                       ),
                     ),

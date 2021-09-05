@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_stream/models/movie_result_model.dart';
 import 'package:movie_stream/service/api_service.dart';
 
-import '../constants.dart';
+import '../service/constants.dart';
 import '../style_constants.dart';
 import '../screens/movie_info_screen.dart';
 
