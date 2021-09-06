@@ -16,45 +16,8 @@ class ProfileScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                        blurRadius: 2,
-                        color: Color(0xff2d2f3c),
-                        spreadRadius: 2)
-                  ],
-                ),
-                child: CircleAvatar(
-                  radius: 50.0,
-                  backgroundImage: NetworkImage(
-                      'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'),
-                ),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Text(
-                'George Albert',
-                style: kTextStyleMedium.copyWith(
-                    fontSize: 20.0, fontWeight: FontWeight.w400),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Text(
-                'georgealbert@gmail.com',
-                style: kTextStyleSmall.copyWith(
-                  fontSize: 16.0,
-                  color: Color(0xffEEEEEE),
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(
-                height: 40.0,
-              ),
+              ProfileHeader(),
+              ProfileAbout(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -90,6 +53,63 @@ class ProfileScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ProfileAbout extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 10.0,
+        ),
+        Text(
+          'George Albert',
+          style: kTextStyleMedium.copyWith(
+            fontSize: 20.0, fontWeight: FontWeight.w400,
+          ),
+        ),
+        SizedBox(
+          height: 10.0,
+        ),
+        Text(
+          'georgealbert@gmail.com',
+          style: kTextStyleSmall.copyWith(
+            fontSize: 16.0,
+            color: Color(0xffEEEEEE),
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        SizedBox(
+          height: 40.0,
+        ),
+      ],
+    );
+  }
+}
+
+class ProfileHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(
+              blurRadius: 2,
+              color: Color(0xff2d2f3c),
+              spreadRadius: 2,
+          )
+        ],
+      ),
+      child: CircleAvatar(
+        radius: 50.0,
+        backgroundImage: NetworkImage(
+            'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'),
       ),
     );
   }
@@ -167,6 +187,7 @@ class ProfileCard extends StatelessWidget {
         onTap: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => widget),
-            ));
+            ),
+    );
   }
 }

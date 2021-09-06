@@ -33,7 +33,6 @@ dependencies:
   tmdb_api: ^2.0.0-nullsafety
   cached_network_image: ^3.1.0
   flutter_dotenv: ^5.0.2
-  carousel_slider: ^4.0.0
   bottom_navy_bar: ^6.0.0
   video_player: ^2.1.13
   youtube_player_flutter: ^8.0.0

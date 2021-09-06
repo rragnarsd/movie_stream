@@ -21,7 +21,6 @@ class _WatchedScreenState extends State<WatchedScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     jsonData = fetchWatched();
   }
@@ -30,30 +29,15 @@ class _WatchedScreenState extends State<WatchedScreen> {
   Widget build(BuildContext context) {
     var movieProvider = Provider.of<MovieProvider>(context);
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'History',
-            style: TextStyle(fontWeight: FontWeight.normal),
-          ),
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          actions: [
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  movieProvider.movieModel.clear();
-                });
-              },
-              icon: Icon(Icons.delete),
-            )
-          ],
-        ),
+        appBar: buildAppBar(movieProvider),
         body: FutureBuilder<MovieResults>(
           future: jsonData,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 20.0,
+                ),
                 child: GridView.builder(
                     shrinkWrap: true,
                     itemCount: snapshot.data!.results.length,
@@ -67,7 +51,9 @@ class _WatchedScreenState extends State<WatchedScreen> {
                       final movie = snapshot.data!.results[index].title;
                       return Padding(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 5.0, horizontal: 5.0),
+                          vertical: 5.0,
+                          horizontal: 5.0,
+                        ),
                         child: Dismissible(
                           direction: DismissDirection.endToStart,
                           key: Key(movie),
@@ -83,7 +69,7 @@ class _WatchedScreenState extends State<WatchedScreen> {
                           },
                           background: Container(
                             alignment: AlignmentDirectional.centerEnd,
-                            color: Colors.red,
+                            color: Color(0xffBD4B4B),
                             child: Padding(
                               padding: const EdgeInsets.only(right: 20.0),
                               child: Icon(
@@ -95,10 +81,7 @@ class _WatchedScreenState extends State<WatchedScreen> {
                           child: Container(
                             decoration: kOnlyBoxShadow,
                             child: ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20.0),
-                                bottomRight: Radius.circular(20.0),
-                              ),
+                              borderRadius: kBorderRadiusOnly,
                               child: CachedNetworkImage(
                                 imageUrl: Constants.imageUrl +
                                     snapshot.data!.results[index].posterPath,
@@ -106,7 +89,8 @@ class _WatchedScreenState extends State<WatchedScreen> {
                                   color: Colors.black12,
                                 ),
                                 errorWidget: (context, url, error) => Container(
-                                  width: MediaQuery.of(context).size.width * 0.23,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.23,
                                   color: Theme.of(context).splashColor,
                                   child: Icon(
                                     Icons.error,
@@ -128,86 +112,31 @@ class _WatchedScreenState extends State<WatchedScreen> {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(
-                      color: Color(0xffEEEEEE)
-                  )
-                ],
+                children: [CircularProgressIndicator(color: Color(0xffEEEEEE))],
               ),
             );
           },
-        )
+        ));
+  }
 
-
-
-      /*Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-          child: GridView.builder(
-              shrinkWrap: true,
-              itemCount: movieProvider.movieModel.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                childAspectRatio: 2 / 3,
-              ),
-              itemBuilder: (context, index) {
-                final movie = movieProvider.movieModel[index].title;
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 5.0, horizontal: 5.0),
-                  child: Dismissible(
-                    direction: DismissDirection.endToStart,
-                    key: Key(movie),
-                    onDismissed: (direction) {
-                      setState(() {
-                        movieProvider.movieModel.removeAt(index);
-                      });
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('$movie deleted from the list'),
-                        ),
-                      );
-                    },
-                    background: Container(
-                      alignment: AlignmentDirectional.centerEnd,
-                      color: Colors.red,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20.0),
-                        child: Icon(
-                          Icons.delete,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    child: Container(
-                      decoration: kOnlyBoxShadow,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20.0),
-                          bottomRight: Radius.circular(20.0),
-                        ),
-                        child: CachedNetworkImage(
-                          imageUrl: Constants.imageUrl +
-                              movieProvider.movieModel[index].posterPath,
-                          placeholder: (context, url) => Container(
-                            color: Colors.black12,
-                          ),
-                          errorWidget: (context, url, error) => Container(
-                            width: MediaQuery.of(context).size.width * 0.23,
-                            color: Theme.of(context).splashColor,
-                            child: Icon(
-                              Icons.error,
-                              color: Theme.of(context).iconTheme.color,
-                              size: 40.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              }),
-        )*/ );
+  AppBar buildAppBar(MovieProvider movieProvider) {
+    return AppBar(
+        title: Text(
+          'History',
+          style: TextStyle(fontWeight: FontWeight.normal),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                movieProvider.movieModel.clear();
+              });
+            },
+            icon: Icon(Icons.delete),
+          )
+        ],
+      );
   }
 }

@@ -36,25 +36,21 @@ class ReviewsScreen extends StatelessWidget {
                   children: [
                     Text(
                       reviews[index]['name'],
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16.0, letterSpacing: 1.0,
-                      ),
+                      style: kTextStyleMedium.copyWith(fontSize: 16.0),
                     ),
                     SizedBox(
                       height: 10.0,
                     ),
                     Text(
                       'Rating ${reviews[index]['rating']}',
-                      style: TextStyle(color: Colors.grey.shade600, letterSpacing: 1.0),
+                      style: kTextStyleXSmall.copyWith(color:Colors.grey.shade600)
                     ),
                     SizedBox(
                       height: 10.0,
                     ),
                     Text(
                       reviews[index]['overview'],
-                      style: TextStyle(color: Colors.white, letterSpacing: 1.0),
+                      style: kTextStyleXSmall.copyWith(fontSize: 16.0)
                     ),
                   ],
                 ),

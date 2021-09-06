@@ -96,10 +96,7 @@ class _MovieCardUiState extends State<MovieCardUi> {
                                     Row(children: [
                                       Text(
                                         '${snapshot.data!.results[index].voteAverage.toString()}',
-                                        style: TextStyle(
-                                          fontSize: 20.0,
-                                          color: Color(0xffEEEEEE),
-                                        ),
+                                        style: kTextStyleXSmall.copyWith(fontSize: 20.0)
                                       ),
                                       SizedBox(
                                         width: 5.0,

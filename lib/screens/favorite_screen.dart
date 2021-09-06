@@ -19,24 +19,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   Widget build(BuildContext context) {
     var movieProvider = Provider.of<MovieProvider>(context);
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Favorites',
-            style: TextStyle(fontWeight: FontWeight.normal),
-          ),
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          actions: [
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  movieProvider.movieModel.clear();
-                });
-              },
-              icon: Icon(Icons.delete),
-            )
-          ],
-        ),
+        appBar: buildAppBar(movieProvider),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
           child: GridView.builder(
@@ -52,7 +35,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 final movie = movieProvider.movieModel[index].title;
                 return Padding(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 5.0, horizontal: 5.0),
+                      vertical: 5.0, horizontal: 5.0,
+                  ),
                   child: Dismissible(
                     direction: DismissDirection.endToStart,
                     key: Key(movie),
@@ -68,7 +52,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     },
                     background: Container(
                       alignment: AlignmentDirectional.centerEnd,
-                      color: Colors.red,
+                      color: Color(0xffBD4B4B),
                       child: Padding(
                         padding: const EdgeInsets.only(right: 20.0),
                         child: Icon(
@@ -105,6 +89,28 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   ),
                 );
               }),
-        ));
+        ),
+    );
+  }
+
+  AppBar buildAppBar(MovieProvider movieProvider) {
+    return AppBar(
+        title: Text(
+          'Favorites',
+          style: TextStyle(fontWeight: FontWeight.normal),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                movieProvider.movieModel.clear();
+              });
+            },
+            icon: Icon(Icons.delete),
+          )
+        ],
+      );
   }
 }
