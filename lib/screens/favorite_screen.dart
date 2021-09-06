@@ -81,8 +81,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       decoration: kOnlyBoxShadow,
                       child: ClipRRect(
                         borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(40.0),
-                          bottomLeft: Radius.circular(40.0),
+                          topLeft: Radius.circular(20.0),
+                          bottomRight: Radius.circular(20.0),
                         ),
                         child: CachedNetworkImage(
                           imageUrl: Constants.imageUrl +

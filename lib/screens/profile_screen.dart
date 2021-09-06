@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_stream/screens/favorite_screen.dart';
 import 'package:movie_stream/screens/landing_screen.dart';
+import 'package:movie_stream/screens/watched_screen.dart';
 
 import '../style_constants.dart';
 
@@ -59,14 +60,17 @@ class ProfileScreen extends StatelessWidget {
                   ProfileCard(
                     text: 'Favorite',
                     icon: Icons.favorite,
+                    widget: FavoriteScreen(),
                   ),
                   ProfileCard(
                     text: 'History',
                     icon: Icons.history,
+                    widget: WatchedScreen(),
                   ),
                   ProfileCard(
                     text: 'Bookmark',
                     icon: Icons.bookmark,
+                    widget: FavoriteScreen(),
                   ),
                 ],
               ),
@@ -130,8 +134,9 @@ class ProfileTile extends StatelessWidget {
 class ProfileCard extends StatelessWidget {
   final String text;
   final IconData icon;
+  final Widget widget;
 
-  ProfileCard({required this.text, required this.icon});
+  ProfileCard({required this.text, required this.icon, required this.widget});
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +165,7 @@ class ProfileCard extends StatelessWidget {
         ),
         onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => FavoriteScreen()),
+              MaterialPageRoute(builder: (context) => widget),
             ));
   }
 }
