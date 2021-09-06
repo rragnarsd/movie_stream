@@ -9,13 +9,19 @@ bottom_navy_bar - https://pub.dev/packages/bottom_navy_bar<br>
 youtube_player_flutter - https://pub.dev/packages/youtube_player_flutter<br>
 Provider - https://pub.dev/packages/provider<br>
 
-Design ideas:<br>
+I got inspired by these designs:<br>
 https://dribbble.com/shots/5529233-Movie-App-Interface-Design-Dark-Theme<br>
 https://dribbble.com/shots/14379133-MoviesWatch-On-Demand-Entertainment-App-Cinema-Tv-Series?utm_source=pinterest&utm_campaign=pinterest_shot&utm_content=MoviesWatch+-+On-Demand+Entertainment+App+%28Cinema%2C+Tv%2C+Series%29&utm_medium=Social_Share<br>
-https://unsplash.com/photos/TgQHWBDA3mM<br>
 
-Colors: #EEEEEE, #EFB7B7, #BD4B4B, #017181F
-Dismissible widget
+The color pallette that I used:<br>
+Colors: #EEEEEE, #EFB7B7, #BD4B4B, #017181F<br>
+
+Some of the new things I tried:<br>
+Futurebuilder... I like this one a lot!<br>
+Dismissible widget<br>
+Transform.rotate<br>
+
+
 
 ## Getting Started
 
