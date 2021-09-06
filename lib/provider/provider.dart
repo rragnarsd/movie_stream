@@ -28,4 +28,14 @@ class MovieProvider extends ChangeNotifier {
   List<MovieModel> get movieList {
     return movieModel;
   }
+
+  //Favorites
+  void clearAllFavorites() {
+    movieModel.clear();
+    notifyListeners();
+  }
+
+
+
+
 }

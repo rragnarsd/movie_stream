@@ -48,55 +48,30 @@ class _WatchedScreenState extends State<WatchedScreen> {
                       childAspectRatio: 2 / 3,
                     ),
                     itemBuilder: (context, index) {
-                      final movie = snapshot.data!.results[index].title;
+                      final movie = snapshot.data!.results[index];
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                           vertical: 5.0,
                           horizontal: 5.0,
                         ),
-                        child: Dismissible(
-                          direction: DismissDirection.endToStart,
-                          key: Key(movie),
-                          onDismissed: (direction) {
-                            setState(() {
-                              snapshot.data!.results.removeAt(index);
-                            });
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('$movie deleted from the list'),
+                        child: Container(
+                          decoration: kOnlyBoxShadow,
+                          child: ClipRRect(
+                            borderRadius: kBorderRadiusOnly,
+                            child: CachedNetworkImage(
+                              imageUrl: Constants.imageUrl +
+                                  movie.posterPath,
+                              placeholder: (context, url) => Container(
+                                color: Colors.black12,
                               ),
-                            );
-                          },
-                          background: Container(
-                            alignment: AlignmentDirectional.centerEnd,
-                            color: Color(0xffBD4B4B),
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 20.0),
-                              child: Icon(
-                                Icons.delete,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          child: Container(
-                            decoration: kOnlyBoxShadow,
-                            child: ClipRRect(
-                              borderRadius: kBorderRadiusOnly,
-                              child: CachedNetworkImage(
-                                imageUrl: Constants.imageUrl +
-                                    snapshot.data!.results[index].posterPath,
-                                placeholder: (context, url) => Container(
-                                  color: Colors.black12,
-                                ),
-                                errorWidget: (context, url, error) => Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.23,
-                                  color: Theme.of(context).splashColor,
-                                  child: Icon(
-                                    Icons.error,
-                                    color: Theme.of(context).iconTheme.color,
-                                    size: 40.0,
-                                  ),
+                              errorWidget: (context, url, error) => Container(
+                                width:
+                                    MediaQuery.of(context).size.width * 0.23,
+                                color: Theme.of(context).splashColor,
+                                child: Icon(
+                                  Icons.error,
+                                  color: Theme.of(context).iconTheme.color,
+                                  size: 40.0,
                                 ),
                               ),
                             ),
@@ -127,16 +102,6 @@ class _WatchedScreenState extends State<WatchedScreen> {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        actions: [
-          IconButton(
-            onPressed: () {
-              setState(() {
-                movieProvider.movieModel.clear();
-              });
-            },
-            icon: Icon(Icons.delete),
-          )
-        ],
       );
   }
 }

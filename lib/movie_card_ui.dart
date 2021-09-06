@@ -96,7 +96,8 @@ class _MovieCardUiState extends State<MovieCardUi> {
                                     Row(children: [
                                       Text(
                                         '${snapshot.data!.results[index].voteAverage.toString()}',
-                                        style: kTextStyleXSmall.copyWith(fontSize: 20.0)
+                                        style: kTextStyleXSmall.copyWith(
+                                            fontSize: 20.0),
                                       ),
                                       SizedBox(
                                         width: 5.0,
@@ -154,28 +155,20 @@ class _MovieCardUiState extends State<MovieCardUi> {
                           top: 30.0,
                           child: InkWell(
                             onTap: () {
+                              final movie = snapshot.data!.results[index];
                               movieProvider.addCount();
                               MovieModel movieModel = new MovieModel(
-                                adult: snapshot.data!.results[index].adult,
-                                genreIds:
-                                    snapshot.data!.results[index].genreIds,
-                                id: snapshot.data!.results[index].id,
-                                originalTitle:
-                                    snapshot.data!.results[index].originalTitle,
-                                overview:
-                                    snapshot.data!.results[index].overview,
-                                popularity:
-                                    snapshot.data!.results[index].popularity,
-                                posterPath:
-                                    snapshot.data!.results[index].posterPath,
-                                releaseDate:
-                                    snapshot.data!.results[index].releaseDate,
-                                title: snapshot.data!.results[index].title,
-                                video: snapshot.data!.results[index].video,
-                                voteAverage:
-                                    snapshot.data!.results[index].voteAverage,
-                                voteCount:
-                                    snapshot.data!.results[index].voteCount,
+                                adult: movie.adult,
+                                genreIds: movie.genreIds,
+                                id: movie.id,
+                                originalTitle: movie.originalTitle,
+                                overview: movie.overview,
+                                popularity: movie.popularity,
+                                posterPath: movie.posterPath,
+                                releaseDate: movie.releaseDate,
+                                title: movie.title,
+                                voteAverage: movie.voteAverage,
+                                voteCount: movie.voteCount,
                               );
                               movieProvider.addMovie(movieModel);
 

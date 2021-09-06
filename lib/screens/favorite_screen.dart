@@ -17,7 +17,7 @@ class FavoriteScreen extends StatefulWidget {
 class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
-    var movieProvider = Provider.of<MovieProvider>(context);
+    final movieProvider = Provider.of<MovieProvider>(context);
     return Scaffold(
         appBar: buildAppBar(movieProvider),
         body: Padding(
@@ -39,11 +39,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   ),
                   child: Dismissible(
                     direction: DismissDirection.endToStart,
-                    key: Key(movie),
+                    key: UniqueKey(),
                     onDismissed: (direction) {
-                      setState(() {
-                        movieProvider.movieModel.removeAt(index);
-                      });
+                      movieProvider.removeMovie(movieProvider.movieModel[index]);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('$movie deleted from the list'),
@@ -103,11 +101,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         elevation: 0.0,
         actions: [
           IconButton(
-            onPressed: () {
-              setState(() {
-                movieProvider.movieModel.clear();
-              });
-            },
+            onPressed: () => movieProvider.clearAllFavorites(),
             icon: Icon(Icons.delete),
           )
         ],

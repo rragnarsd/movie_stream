@@ -71,7 +71,8 @@ class LandingScreen extends StatelessWidget {
                         color: Color(0xffBD4B4B),
                         letterSpacing: 0.5),
                   ),
-                ])),
+                ]),
+                ),
                 SizedBox(
                   height: 15.0,
                 ),

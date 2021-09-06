@@ -30,7 +30,9 @@ class _GetLatestWidgetState extends State<GetLatestWidget> {
       Container(
         child: Text(
           'Now Playing',
-        style: kTextStyleMedium.copyWith(fontSize: 20.0,),
+          style: kTextStyleMedium.copyWith(
+            fontSize: 20.0,
+          ),
         ),
       ),
       Container(
@@ -52,31 +54,38 @@ class _GetLatestWidgetState extends State<GetLatestWidget> {
                               const EdgeInsets.only(right: 20.0, top: 20.0),
                           child: Stack(fit: StackFit.passthrough, children: [
                             Container(
-                              decoration:kBorderRadiusWithShadows,
+                              decoration: kBorderRadiusWithShadows,
                               child: ClipRRect(
-                                child: CachedNetworkImage(
-                                  imageUrl: Constants.imageUrl +
-                                      snapshot.data!.results[index].posterPath,
-                                  fit: BoxFit.fitWidth,
-                                ),
-                                borderRadius: kBorderRadiusOnly
+                                  child: CachedNetworkImage(
+                                    imageUrl: Constants.imageUrl +
+                                        snapshot
+                                            .data!.results[index].posterPath,
+                                    fit: BoxFit.fitWidth,
+                                  ),
+                                  borderRadius: kBorderRadiusOnly,
                               ),
                             ),
                             Container(
                               alignment: Alignment.bottomCenter,
                               child: ClipRRect(
-                                child: Container(
+                                  child: Container(
                                     width: double.infinity,
                                     alignment: Alignment.center,
                                     height: 45.0,
                                     color: Colors.black.withOpacity(0.7),
-                                    child: Text(
-                                      snapshot.data!.results[index].title,
-                                      style: kTextStyleXSmall.copyWith(fontSize: 18.0)
+                                    child: Container(
+                                      width: 240.0,
+                                      child: Text(
+                                          snapshot.data!.results[index].title,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.center,
+                                          style: kTextStyleXSmall.copyWith(
+                                              fontSize: 18.0),
+                                      ),
                                     ),
-                                ),
-                                borderRadius: kBorderRadiusOnly
-                              ),
+                                  ),
+                                  borderRadius: kBorderRadiusOnly),
                             )
                           ]),
                         ),
@@ -99,11 +108,7 @@ class _GetLatestWidgetState extends State<GetLatestWidget> {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(
-                    color: Color(0xffEEEEEE)
-                  )
-                ],
+                children: [CircularProgressIndicator(color: Color(0xffEEEEEE))],
               ),
             );
           },
