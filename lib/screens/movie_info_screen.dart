@@ -58,9 +58,9 @@ class MovieInfoScreen extends StatelessWidget {
                                 child: Text(movie.title,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
-                                    style: kTextStyleMedium),
+                                    style: kTextStyleMedium,
+                                ),
                               ),
-                              Icon(Icons.favorite),
                             ]),
                         SizedBox(
                           height: 10.0,
