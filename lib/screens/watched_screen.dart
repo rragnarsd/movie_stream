@@ -23,7 +23,7 @@ class _WatchedScreenState extends State<WatchedScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    jsonData = fetchRecommendations();
+    jsonData = fetchWatched();
   }
 
   @override

@@ -58,7 +58,7 @@ Future<MovieResults> fetchNowPlaying() async {
   }
 }
 
-Future<MovieResults> fetchRecommendations() async {
+Future<MovieResults> fetchWatched() async {
   final response = await http.get(Uri.parse(Constants.baseUrl +
       Constants.watchedMovies +
       dotenv.get('API_PARAM') +
@@ -70,7 +70,6 @@ Future<MovieResults> fetchRecommendations() async {
     throw Exception('Failed to load data');
   }
 }
-
 
 Future<MovieResults> searchMovies() async {
   final response = await http.get(Uri.parse(Constants.baseUrl +

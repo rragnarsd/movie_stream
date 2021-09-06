@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +9,10 @@ import 'package:movie_stream/auth/auth_screen.dart';
 import '../style_constants.dart';
 
 class LandingScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
           colorFilter: const ColorFilter.mode(
             Colors.black,
@@ -29,8 +29,9 @@ class LandingScreen extends StatelessWidget {
         body: Container(
           color: Colors.black.withOpacity(0.6),
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+            padding: const EdgeInsets.symmetric(
+                horizontal: 20.0, vertical: 20.0,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

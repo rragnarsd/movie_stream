@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_stream/screens/favorite_screen.dart';
 import 'package:movie_stream/screens/landing_screen.dart';
+import 'package:movie_stream/screens/reviews_screen.dart';
 import 'package:movie_stream/screens/watched_screen.dart';
 
 import '../style_constants.dart';
@@ -68,9 +69,9 @@ class ProfileScreen extends StatelessWidget {
                     widget: WatchedScreen(),
                   ),
                   ProfileCard(
-                    text: 'Bookmark',
-                    icon: Icons.bookmark,
-                    widget: FavoriteScreen(),
+                    text: 'Reviews',
+                    icon: Icons.reviews,
+                    widget: ReviewsScreen(),
                   ),
                 ],
               ),
