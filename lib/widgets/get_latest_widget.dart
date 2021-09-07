@@ -7,6 +7,7 @@ import 'package:movie_stream/service/api_service.dart';
 import '../service/constants.dart';
 import '../style_constants.dart';
 import '../screens/movie_info_screen.dart';
+import 'now_playing_widget.dart';
 
 class GetLatest extends StatefulWidget {
   const GetLatest({Key? key}) : super(key: key);
@@ -27,11 +28,7 @@ class _GetLatestState extends State<GetLatest> {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Container(
-          child: Text(
-        'Get Latest',
-            style: kTextStyleMedium.copyWith(fontSize: 20.0,),
-      )),
+      HomeHeader(text: 'Get Latest',),
       Container(
         height: 290.0,
         child: FutureBuilder<MovieResults>(

@@ -27,14 +27,7 @@ class _GetLatestWidgetState extends State<GetLatestWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Container(
-        child: Text(
-          'Now Playing',
-          style: kTextStyleMedium.copyWith(
-            fontSize: 20.0,
-          ),
-        ),
-      ),
+      HomeHeader(text: 'Now Playing'),
       Container(
         height: 250.0,
         child: FutureBuilder<MovieResults>(
@@ -85,7 +78,8 @@ class _GetLatestWidgetState extends State<GetLatestWidget> {
                                       ),
                                     ),
                                   ),
-                                  borderRadius: kBorderRadiusOnly),
+                                  borderRadius: kBorderRadiusOnly,
+                              ),
                             )
                           ]),
                         ),
@@ -115,5 +109,22 @@ class _GetLatestWidgetState extends State<GetLatestWidget> {
         ),
       ),
     ]);
+  }
+}
+
+class HomeHeader extends StatelessWidget {
+  final String text;
+
+  HomeHeader({required this.text});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text(
+        text,
+        style: kTextStyleMedium.copyWith(
+          fontSize: 20.0,
+        ),
+      ),
+    );
   }
 }

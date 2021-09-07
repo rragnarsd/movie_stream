@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 import 'package:movie_stream/screens/favorite_screen.dart';
 import 'package:movie_stream/screens/landing_screen.dart';
 import 'package:movie_stream/screens/reviews_screen.dart';
@@ -12,7 +13,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 70.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 60.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -69,7 +70,8 @@ class ProfileAbout extends StatelessWidget {
         Text(
           'George Albert',
           style: kTextStyleMedium.copyWith(
-            fontSize: 20.0, fontWeight: FontWeight.w400,
+            fontSize: 20.0,
+            fontWeight: FontWeight.w400,
           ),
         ),
         SizedBox(
@@ -91,27 +93,59 @@ class ProfileAbout extends StatelessWidget {
   }
 }
 
-class ProfileHeader extends StatelessWidget {
+class ProfileHeader extends StatefulWidget {
+  const ProfileHeader({Key? key}) : super(key: key);
+
   @override
+  _ProfileHeaderState createState() => _ProfileHeaderState();
+}
+
+class _ProfileHeaderState extends State<ProfileHeader>
+    with TickerProviderStateMixin {
+  late final AnimationController _controller =
+      AnimationController(vsync: this, duration: const Duration(seconds: 3))
+        ..repeat();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-              blurRadius: 2,
-              color: Color(0xff2d2f3c),
-              spreadRadius: 2,
-          )
-        ],
+    return Stack(children: [
+      AnimatedBuilder(
+        animation: _controller,
+        child: Center(
+          child: Container(
+            width: 130.0,
+            height: 130.0,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                colors: [Color(0xFFEEEEEE), Color(0xFFBD4B4B)],
+              ),
+            ),
+          ),
+        ),
+        builder: (BuildContext context, child) {
+          return Transform.rotate(
+            angle: _controller.value * 2.0 * math.pi,
+            child: child,
+          );
+        },
       ),
-      child: CircleAvatar(
-        radius: 50.0,
-        backgroundImage: NetworkImage(
-            'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'),
+      Center(
+        child: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: CircleAvatar(
+            radius: 60.0,
+            backgroundImage: NetworkImage(
+                'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'),
+          ),
+        ),
       ),
-    );
+    ]);
   }
 }
 
@@ -162,32 +196,32 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        child: Container(
-          width: 110.0,
-          height: 110.0,
-          decoration: kBorderRadiusWithShadows,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: Column(children: [
-              Icon(
-                icon,
-                size: 40.0,
-                color: Color(0xffeeedf0),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Text(
-                text,
-                style: TextStyle(color: Color(0xffBD4B4B), letterSpacing: 1.0),
-              )
-            ]),
-          ),
-        ),
-        onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => widget),
+      child: Container(
+        width: 110.0,
+        height: 110.0,
+        decoration: kBorderRadiusWithShadows,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20.0),
+          child: Column(children: [
+            Icon(
+              icon,
+              size: 40.0,
+              color: Color(0xffeeedf0),
             ),
+            SizedBox(
+              height: 5.0,
+            ),
+            Text(
+              text,
+              style: TextStyle(color: Color(0xffBD4B4B), letterSpacing: 1.0),
+            )
+          ]),
+        ),
+      ),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => widget),
+      ),
     );
   }
 }

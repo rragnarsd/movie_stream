@@ -171,7 +171,7 @@ class _MovieCardUiState extends State<MovieCardUi> {
                                 voteCount: movie.voteCount,
                               );
                               movieProvider.addMovie(movieModel);
-
+                              /*movieProvider.isFavorite(isFav, title);*/
                               setState(() {
                                 if (isFav) {
                                   favMovies.remove(title);

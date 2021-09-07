@@ -11,6 +11,14 @@ class MovieProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  int get count {
+    return _count;
+  }
+
+  List<MovieModel> get movieList {
+    return movieModel;
+  }
+
   void addMovie(MovieModel data) {
     movieModel.add(data);
     notifyListeners();
@@ -21,21 +29,11 @@ class MovieProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  int get count {
-    return _count;
-  }
-
-  List<MovieModel> get movieList {
-    return movieModel;
-  }
-
   //Favorites
   void clearAllFavorites() {
     movieModel.clear();
     notifyListeners();
   }
-
-
 
 
 }

@@ -8,7 +8,6 @@ import '../service/constants.dart';
 import '../style_constants.dart';
 
 class FavoriteScreen extends StatefulWidget {
-  const FavoriteScreen({Key? key}) : super(key: key);
 
   @override
   _FavoriteScreenState createState() => _FavoriteScreenState();
@@ -45,20 +44,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('$movie deleted from the list'),
+                          duration: Duration(milliseconds: 1200),
                         ),
                       );
                     },
-                    background: Container(
-                      alignment: AlignmentDirectional.centerEnd,
-                      color: Color(0xffBD4B4B),
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20.0),
-                        child: Icon(
-                          Icons.delete,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
+                    background: FavoriteDelete(),
                     child: Container(
                       decoration: kOnlyBoxShadow,
                       child: ClipRRect(
@@ -106,5 +96,22 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           )
         ],
       );
+  }
+}
+
+class FavoriteDelete extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: AlignmentDirectional.centerEnd,
+      color: Color(0xffBD4B4B),
+      child: Padding(
+        padding: const EdgeInsets.only(right: 20.0),
+        child: Icon(
+          Icons.delete,
+          color: Colors.white,
+        ),
+      ),
+    );
   }
 }
