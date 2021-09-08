@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:movie_stream/service/constants.dart';
 import 'package:movie_stream/models/movie_model.dart';
 import 'package:movie_stream/screens/favorite_screen.dart';
@@ -14,9 +15,7 @@ class MovieInfoScreen extends StatelessWidget {
     final movie = ModalRoute.of(context)!.settings.arguments as MovieModel;
     return Scaffold(
       body: Container(
-        height: 800,
         child: Container(
-          height: 900,
           child: Stack(
             children: [
               MovieInfoBackground(),
@@ -95,14 +94,15 @@ class MovieInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return Positioned(
-      top: 280,
-      left: 30,
+      top: 240,
+      left: 25,
       child: Container(
         decoration: kBorderRadiusWithShadows,
         child: Container(
-          width: 350,
-          height: 250,
+          width: 400.0,
+          height: 280,
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
@@ -132,7 +132,7 @@ class MovieInfoCard extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 5.0,
+                    width: 10.0,
                   ),
                   Icon(
                     Icons.star,

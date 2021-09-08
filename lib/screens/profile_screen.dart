@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_stream/auth/auth_screen.dart';
 import 'dart:math' as math;
 import 'package:movie_stream/screens/favorite_screen.dart';
 import 'package:movie_stream/screens/landing_screen.dart';
@@ -30,62 +29,65 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 60.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              ProfileHeader(),
-              ProfileAbout(user: widget.user,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ProfileCard(
-                    text: 'Favorite',
-                    icon: Icons.favorite,
-                    widget: FavoriteScreen(),
-                  ),
-                  ProfileCard(
-                    text: 'History',
-                    icon: Icons.history,
-                    widget: WatchedScreen(),
-                  ),
-                  ProfileCard(
-                    text: 'Reviews',
-                    icon: Icons.reviews,
-                    widget: ReviewsScreen(),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 40.0,
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              InkWell(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: ListTile(
-                    tileColor: Color(0xff2d2f3c),
-                    title: Text(
-                      'Sign out',
-                      style: TextStyle(
-                        color: Color(0xffEEEEEE),
-                        letterSpacing: 1.0,
-                        fontWeight: FontWeight.w400,
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 80.0),
+        child: Container(
+          width: 400.0,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                ProfileHeader(),
+                ProfileAbout(user: widget.user,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ProfileCard(
+                      text: 'Favorite',
+                      icon: Icons.favorite,
+                      widget: FavoriteScreen(),
+                    ),
+                    ProfileCard(
+                      text: 'History',
+                      icon: Icons.history,
+                      widget: WatchedScreen(),
+                    ),
+                    ProfileCard(
+                      text: 'Reviews',
+                      icon: Icons.reviews,
+                      widget: ReviewsScreen(),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 40.0,
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                InkWell(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: ListTile(
+                      tileColor: Color(0xff2d2f3c),
+                      title: Text(
+                        'Sign out',
+                        style: TextStyle(
+                          color: Color(0xffEEEEEE),
+                          letterSpacing: 1.0,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
+                      trailing: Icon(
+                        Icons.chevron_right,
+                        color: Color(0xffEEEEEE),
+                      ),
+                      onTap: signOutTheUser
                     ),
-                    trailing: Icon(
-                      Icons.chevron_right,
-                      color: Color(0xffEEEEEE),
-                    ),
-                    onTap: signOutTheUser
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

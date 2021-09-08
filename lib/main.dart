@@ -1,19 +1,13 @@
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:movie_stream/auth/auth_screen.dart';
-import 'package:movie_stream/auth/login_screen.dart';
-import 'package:movie_stream/bottomNavy.dart';
 import 'package:movie_stream/provider/provider.dart';
-import 'package:movie_stream/screens/home_screen.dart';
 import 'package:movie_stream/screens/landing_screen.dart';
-import 'package:movie_stream/screens/movie_info_screen.dart';
-import 'package:movie_stream/screens/profile_screen.dart';
-import 'package:movie_stream/widgets/movie_tabs_category.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'bottomNavy.dart';
 
 int? notFirstTime;
 
@@ -31,10 +25,23 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  
+/*  final User user;
+
+  MyApp({required this.user});*/
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        builder: (context, child) => ResponsiveWrapper.builder(
+              child,
+              maxWidth: 1200,
+              minWidth: 450,
+              defaultScale: true,
+              breakpoints: [
+                ResponsiveBreakpoint.resize(450, name: MOBILE),
+                ResponsiveBreakpoint.autoScale(800, name: TABLET),
+                ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+              ],
+            ),
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -45,10 +52,9 @@ class MyApp extends StatelessWidget {
           iconTheme: IconThemeData(color: Color(0xFFEEEEEE)),
         ),
         home: Scaffold(
-      /*    body: notFirstTime != 0 ? LandingScreen() : BottomNavy(user: user)*/
-        body: LandingScreen(),
+          /* body: notFirstTime != 0 ? LandingScreen() : BottomNavy(user: )*/
+          body: LandingScreen(),
           /*BottomNavy(user: ),*/
-        )
-    );
+        ));
   }
 }

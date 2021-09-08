@@ -1,21 +1,14 @@
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_stream/bottomNavy.dart';
-import 'package:movie_stream/widgets/reusable_btn.dart';
 import 'package:movie_stream/auth/auth_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../style_constants.dart';
-import 'home_screen.dart';
 
 class LandingScreen extends StatefulWidget {
-/*  final User user;
-
-  LandingScreen({required this.user});*/
   @override
   _LandingScreenState createState() => _LandingScreenState();
 }
@@ -47,9 +40,8 @@ class _LandingScreenState extends State<LandingScreen> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          colorFilter: const ColorFilter.mode(
-            Colors.black,
-            /* Colors.black.withOpacity(0.2),*/
+          colorFilter: ColorFilter.mode(
+            Colors.black.withOpacity(0.2),
             BlendMode.dstATop,
           ),
           image: NetworkImage(
@@ -133,7 +125,6 @@ class _LandingScreenState extends State<LandingScreen> {
                         context,
                         MaterialPageRoute(
                            builder: (context) => AuthScreen()
-                         /* builder: (context) => BottomNavy(user: widget.user)*/
                         ),
                       );
                     },
@@ -153,17 +144,6 @@ class _LandingScreenState extends State<LandingScreen> {
                     ),
                   ),
                 )
-             /*   ReusableButton(
-                  btnText: 'Get Started',
-                  btnColor: 0xFFBD4B4B,
-                  btnTextColor: 0xffEEEEEE,
-                  function: () => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => AuthScreen(),
-                    ),
-                  ),
-                )*/
               ],
             ),
           ),
