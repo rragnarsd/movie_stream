@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_stream/auth/fire_auth.dart';
+import 'package:movie_stream/auth/validator.dart';
+import 'package:movie_stream/screens/home_screen.dart';
 import 'package:movie_stream/widgets/logo_auth.dart';
 
 import '../widgets/reusable_btn.dart';
@@ -14,11 +18,32 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool _isHidden = true;
+  final _registerFormKey = GlobalKey<FormState>();
+  final _emailTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
+  final _nameTextController = TextEditingController();
+
+  final _focusEmail = FocusNode();
+  final _focusPassword = FocusNode();
+  final _focusName = FocusNode();
 
   void togglePassword() {
     setState(() {
       _isHidden = !_isHidden;
     });
+  }
+
+  void _submitRegisterForm() async {
+    if (_registerFormKey.currentState!.validate()) {
+      User? user = await FireAuth.registerUsingEmailPassword(
+          name: _nameTextController.text,
+          email: _emailTextController.text,
+          password: _passwordTextController.text);
+      if (user != null) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => BottomNavigationBar(items: [],)));
+      }
+    }
   }
 
   @override
@@ -55,8 +80,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       horizontal: 20.0,
                     ),
                     child: Form(
+                      key: _registerFormKey,
                       child: Container(
-                        height: 400,
+                        height: 420,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
                           color: Colors.white,
@@ -66,8 +92,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              SizedBox(
+                                height: 20.0,
+                              ),
                               TextFormField(
                                 keyboardType: TextInputType.emailAddress,
+                                controller: _emailTextController,
+                                focusNode: _focusEmail,
+                                validator: (value) =>
+                                    Validator.validateEmail(email: _emailTextController.text),
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(20.0),
                                   hintText: 'Email',
@@ -90,15 +123,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               TextFormField(
                                 obscureText: _isHidden,
                                 keyboardType: TextInputType.number,
+                                controller: _passwordTextController,
+                                focusNode: _focusPassword,
+                                validator: (value) =>
+                                    Validator.validatePassword(password: _passwordTextController.text),
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(20.0),
                                   hintText: 'Password',
                                   prefixIcon: Icon(Icons.lock),
                                   suffixIcon: InkWell(
                                     child: Icon(_isHidden
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                    ),
+                                        ? Icons.visibility_off
+                                        : Icons.visibility),
                                     onTap: togglePassword,
                                   ),
                                   filled: true,
@@ -117,11 +153,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               SizedBox(
                                 height: 20.0,
                               ),
+                              TextFormField(
+                                keyboardType: TextInputType.name,
+                                controller: _nameTextController,
+                                focusNode: _focusName,
+                                validator: (value) =>
+                                    Validator.validateName(name: _nameTextController.text),
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.all(20.0),
+                                  hintText: 'Full Name',
+                                  prefixIcon: Icon(Icons.person),
+                                  filled: true,
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide:
+                                        BorderSide(color: Colors.grey.shade400),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20.0,
+                              ),
                               ReusableButton(
-                                  btnText: 'Register',
-                                  btnColor: 0xFFBD4B4B,
-                                  btnTextColor: 0xffEEEEEE,
-                                  function: () {}),
+                                btnText: 'Register',
+                                btnColor: 0xFFBD4B4B,
+                                btnTextColor: 0xffEEEEEE,
+                                function: _submitRegisterForm,
+                              ),
                               SizedBox(
                                 height: 20.0,
                               ),

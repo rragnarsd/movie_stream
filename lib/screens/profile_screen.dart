@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_stream/auth/auth_screen.dart';
 import 'dart:math' as math;
 import 'package:movie_stream/screens/favorite_screen.dart';
 import 'package:movie_stream/screens/landing_screen.dart';
@@ -8,7 +10,30 @@ import 'package:movie_stream/screens/watched_screen.dart';
 
 import '../style_constants.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  final User user;
+
+  ProfileScreen({required this.user});
+
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  bool _isSigningOut = false;
+  late User _currentUser;
+
+  @override
+  void initState() {
+   _currentUser = widget.user;
+    super.initState();
+  }
+
+  void signOutTheUser() async{
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AuthScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +43,37 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             children: [
               ProfileHeader(),
-              ProfileAbout(),
+          Column(
+            children: [
+              SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                '${_currentUser.displayName}',
+               /* 'George Albert',*/
+                style: kTextStyleMedium.copyWith(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                '${_currentUser.email}',
+                /*'georgealbert@gmail.com',*/
+                style: kTextStyleSmall.copyWith(
+                  fontSize: 16.0,
+                  color: Color(0xffEEEEEE),
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              SizedBox(
+                height: 40.0,
+              ),
+            ],
+          ),
+              /*ProfileAbout( ),*/
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -42,15 +97,39 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(
                 height: 40.0,
               ),
-              ProfileTile(
+            /*  ProfileTile(
                 text: 'Notifications',
-              ),
+              ),*/
               SizedBox(
                 height: 10.0,
               ),
-              ProfileTile(
-                text: 'Sign Out',
+          Material(
+            child: InkWell(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: ListTile(
+                    tileColor: Color(0xff2d2f3c),
+                    title: Text(
+                      'Sign Out',
+                      style: TextStyle(
+                        color: Color(0xffEEEEEE),
+                        letterSpacing: 1.0,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    trailing: Icon(
+                      Icons.chevron_right,
+                      color: Color(0xffEEEEEE),
+                    ),
+                    onTap: signOutTheUser,
+                    )),
               ),
+            ),
+             /* ProfileTile(
+                text: 'Sign Out',
+              ),*/
             ],
           ),
         ),
@@ -59,7 +138,17 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-class ProfileAbout extends StatelessWidget {
+class ProfileAbout extends StatefulWidget {
+  final User user;
+
+  ProfileAbout({required this.user});
+  @override
+  _ProfileAboutState createState() => _ProfileAboutState();
+}
+
+class _ProfileAboutState extends State<ProfileAbout> {
+  bool _isSendingVerification = false;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -149,7 +238,7 @@ class _ProfileHeaderState extends State<ProfileHeader>
   }
 }
 
-class ProfileTile extends StatelessWidget {
+/*class ProfileTile extends StatelessWidget {
   final String text;
 
   ProfileTile({required this.text});
@@ -184,7 +273,7 @@ class ProfileTile extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 
 class ProfileCard extends StatelessWidget {
   final String text;

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "49711455583",
+    "project_id": "moviestream-a4f51",
+    "storage_bucket": "moviestream-a4f51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49711455583:android:b6c3a59fd0497ebc58eaea",
+        "android_client_info": {
+          "package_name": "com.example.movie_stream"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "49711455583-djmelul886f6bshsm3mubilksngutm7v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg-eLW_Css-9lhVJIO1JUvEaYm1RLVDZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "49711455583-djmelul886f6bshsm3mubilksngutm7v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

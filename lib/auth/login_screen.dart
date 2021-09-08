@@ -1,6 +1,10 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_stream/auth/fire_auth.dart';
+import 'package:movie_stream/auth/validator.dart';
 import 'package:movie_stream/screens/home_screen.dart';
 import 'package:movie_stream/screens/profile_screen.dart';
 import 'package:movie_stream/widgets/logo_auth.dart';
@@ -17,21 +21,25 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-/*  Color _colorText = Colors.black54;*/
-/*  late FocusNode _focusNode;*/
   bool _isHidden = true;
+  final _loginFormKey = GlobalKey<FormState>();
+  final _emailTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
 
-/*  @override
-  void initState() {
-    super.initState();
-    _focusNode = FocusNode();
+  final _focusEmail = FocusNode();
+  final _focusPassword = FocusNode();
+
+  //Check if the user is signed in
+  Future<FirebaseApp> _initializeFirebase() async {
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => ProfileScreen(user: user)));
+    }
+    return firebaseApp;
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _focusNode.dispose();
-  }*/
 
   void togglePassword() {
     setState(() {
@@ -39,11 +47,21 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
+  void _submitLoginForm() async {
+    if (_loginFormKey.currentState!.validate()) {
+      User? user = await FireAuth.signInUsingEmailPassword(
+          email: _emailTextController.text,
+          password: _passwordTextController.text,
+          context: context);
+      if (user != null) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => BottomNavigationBar(user)));
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    //https://stackoverflow.com/questions/56411599/flutter-textformfield-change-labelcolor-on-focus
-/*    var _defaultColor = Colors.black54;
-    var _focusedColor = Theme.of(context).primaryColor;*/
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -59,141 +77,164 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         resizeToAvoidBottomInset: false,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                  ),
-                ),
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 20.0,
-                      horizontal: 20.0,
-                    ),
-                    child: Form(
-                      child: Container(
-                        height: 400,
+        body: FutureBuilder(
+          future: _initializeFirebase(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Stack(
+                    children: [
+                      Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: Colors.white,
+                          color: Colors.grey,
                         ),
+                      ),
+                      Center(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TextFormField(
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.all(20.0),
-                                  hintText: 'Email',
-                                  prefixIcon: Icon(Icons.mail),
-                                  filled: true,
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                      color: Colors.grey.shade400,
-                                    ),
-                                  ),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 20.0,
+                            horizontal: 20.0,
+                          ),
+                          child: Form(
+                            key: _loginFormKey,
+                            child: Container(
+                              height: 400,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.white,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 20.0,
-                              ),
-                              TextFormField(
-                                obscureText: _isHidden,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.all(20.0),
-                                  hintText: 'Password',
-                                  prefixIcon: Icon(Icons.lock),
-                                  suffixIcon: InkWell(
-                                    child: Icon(_isHidden ? Icons.visibility : Icons.visibility_off),
-                                    onTap: togglePassword,
-                                  ),
-                                  filled: true,
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                      color: Colors.grey.shade400,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20.0,
-                              ),
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: InkWell(
-                                  child: Text('Forgot your password?'),
-                                  onTap: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20.0,
-                              ),
-                              ReusableButton(
-                                btnText: 'Login',
-                                btnColor: 0xFFBD4B4B,
-                                btnTextColor: 0xffEEEEEE,
-                                function: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            BottomNavigationBar(),
-                                    ),
-                                  );
-                                },
-                              ),
-                              SizedBox(
-                                height: 20.0,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('Don\'t have an account?'),
-                                  SizedBox(
-                                    width: 5.0,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      widget.toggleAuth();
-                                    },
-                                    child: Text(
-                                      'Register',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    TextFormField(
+                                      keyboardType: TextInputType.emailAddress,
+                                      controller: _emailTextController,
+                                      focusNode: _focusEmail,
+                                      validator: (value) =>
+                                          Validator.validateEmail(
+                                              email: _emailTextController.text),
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.all(20.0),
+                                        hintText: 'Email',
+                                        prefixIcon: Icon(Icons.mail),
+                                        filled: true,
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: BorderSide(
+                                            color: Colors.grey.shade400,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              )
-                            ],
+                                    SizedBox(
+                                      height: 20.0,
+                                    ),
+                                    TextFormField(
+                                      obscureText: _isHidden,
+                                      keyboardType: TextInputType.number,
+                                      controller: _passwordTextController,
+                                      focusNode: _focusPassword,
+                                      validator: (value) =>
+                                          Validator.validatePassword(
+                                              password:
+                                                  _passwordTextController.text),
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.all(20.0),
+                                        hintText: 'Password',
+                                        prefixIcon: Icon(Icons.lock),
+                                        suffixIcon: InkWell(
+                                          child: Icon(_isHidden
+                                              ? Icons.visibility_off
+                                              : Icons.visibility),
+                                          onTap: togglePassword,
+                                        ),
+                                        filled: true,
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: BorderSide(
+                                            color: Colors.grey.shade400,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20.0,
+                                    ),
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: InkWell(
+                                        child: Text('Forgot your password?'),
+                                        onTap: () {},
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20.0,
+                                    ),
+                                    ReusableButton(
+                                      btnText: 'Login',
+                                      btnColor: 0xFFBD4B4B,
+                                      btnTextColor: 0xffEEEEEE,
+                                      function: _submitLoginForm,
+                                    ),
+                                    SizedBox(
+                                      height: 20.0,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text('Don\'t have an account?'),
+                                        SizedBox(
+                                          width: 5.0,
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            widget.toggleAuth();
+                                          },
+                                          child: Text(
+                                            'Register',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                      LogoAuth(),
+                    ],
                   ),
-                ),
-                LogoAuth(),
-              ],
-            ),
-          ],
+                ],
+              );
+            }
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          },
         ),
       ),
     );
@@ -201,7 +242,9 @@ class _LoginScreenState extends State<LoginScreen> {
 }
 
 class BottomNavigationBar extends StatefulWidget {
-  const BottomNavigationBar({Key? key}) : super(key: key);
+  final User user;
+
+  BottomNavigationBar(this.user);
 
   @override
   _BottomNavigationBarState createState() => _BottomNavigationBarState();
@@ -235,7 +278,7 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> {
           children: [
             HomeScreen(),
             MovieTabsCategory(),
-            ProfileScreen(),
+            ProfileScreen(user: widget.user),
           ],
         ),
       ),

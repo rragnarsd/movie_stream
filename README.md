@@ -1,6 +1,6 @@
 # MovieStream
 
-The packages that I use:<br>
+<strong>The packages that I use:</strong><br>
 Http - https://pub.dev/packages/http<br>
 Equatable - https://pub.dev/packages/equatable<br>
 Tmdb_api - https://pub.dev/packages/tmdb_api<br>
@@ -9,15 +9,16 @@ bottom_navy_bar - https://pub.dev/packages/bottom_navy_bar<br>
 youtube_player_flutter - https://pub.dev/packages/youtube_player_flutter<br>
 Provider - https://pub.dev/packages/provider<br>
 
-I got inspired by these designs:<br>
+<strong>I got inspired by these designs:</strong><br>
 https://dribbble.com/shots/5529233-Movie-App-Interface-Design-Dark-Theme<br>
 https://dribbble.com/shots/14379133-MoviesWatch-On-Demand-Entertainment-App-Cinema-Tv-Series?utm_source=pinterest&utm_campaign=pinterest_shot&utm_content=MoviesWatch+-+On-Demand+Entertainment+App+%28Cinema%2C+Tv%2C+Series%29&utm_medium=Social_Share<br>
 
-The color pallette that I used:<br>
+<strong>The color pallette that I used:</strong><br>
 Colors: #EEEEEE, #EFB7B7, #BD4B4B, #017181F<br>
 
-Some of the new things I tried:<br>
+<strong>New things I tried:</strong><br>
 Futurebuilder... I like this one a lot!<br>
+AnimatedBuilder<br>
 Dismissible widget<br>
 Transform.rotate<br>
 
