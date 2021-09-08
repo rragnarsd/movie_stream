@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_stream/auth/fire_auth.dart';
 import 'package:movie_stream/auth/validator.dart';
-import 'package:movie_stream/screens/home_screen.dart';
+import 'package:movie_stream/bottomNavy.dart';
 import 'package:movie_stream/widgets/logo_auth.dart';
 
 import '../widgets/reusable_btn.dart';
@@ -41,8 +41,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
           password: _passwordTextController.text);
       if (user != null) {
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => BottomNavigationBar(items: [],)));
+            MaterialPageRoute(builder: (context) => BottomNavy(user: user)));
       }
+      showDialog(
+          context: context,
+          builder: (context) {
+            Future.delayed(Duration(seconds: 5), () {
+              Navigator.of(context).pop(true);
+            });
+            return AlertDialog(
+              title: Text('Successfully registered ${user!.email}'),
+            );
+          });
     }
   }
 
@@ -99,8 +109,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 keyboardType: TextInputType.emailAddress,
                                 controller: _emailTextController,
                                 focusNode: _focusEmail,
-                                validator: (value) =>
-                                    Validator.validateEmail(email: _emailTextController.text),
+                                validator: (value) => Validator.validateEmail(
+                                    email: _emailTextController.text),
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(20.0),
                                   hintText: 'Email',
@@ -126,7 +136,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 controller: _passwordTextController,
                                 focusNode: _focusPassword,
                                 validator: (value) =>
-                                    Validator.validatePassword(password: _passwordTextController.text),
+                                    Validator.validatePassword(
+                                        password: _passwordTextController.text),
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(20.0),
                                   hintText: 'Password',
@@ -157,8 +168,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 keyboardType: TextInputType.name,
                                 controller: _nameTextController,
                                 focusNode: _focusName,
-                                validator: (value) =>
-                                    Validator.validateName(name: _nameTextController.text),
+                                validator: (value) => Validator.validateName(
+                                    name: _nameTextController.text),
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(20.0),
                                   hintText: 'Full Name',

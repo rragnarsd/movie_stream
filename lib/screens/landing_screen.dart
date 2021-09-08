@@ -1,14 +1,47 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_stream/bottomNavy.dart';
 import 'package:movie_stream/widgets/reusable_btn.dart';
 import 'package:movie_stream/auth/auth_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../style_constants.dart';
+import 'home_screen.dart';
 
-class LandingScreen extends StatelessWidget {
+class LandingScreen extends StatefulWidget {
+/*  final User user;
+
+  LandingScreen({required this.user});*/
+  @override
+  _LandingScreenState createState() => _LandingScreenState();
+}
+
+class _LandingScreenState extends State<LandingScreen> {
+  int currentIndex = 0;
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    _pageController = PageController(initialPage: 0);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  _storedInfo() async {
+    int isViewed = 0;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('landingScreen', isViewed);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +63,8 @@ class LandingScreen extends StatelessWidget {
           color: Colors.black.withOpacity(0.6),
           child: Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: 20.0, vertical: 20.0,
+              horizontal: 20.0,
+              vertical: 20.0,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -58,20 +92,20 @@ class LandingScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 30.0),
                 RichText(
-                    text: TextSpan(children: [
-                  TextSpan(
-                    text: 'Moveiiz',
-                    style: kTextStyleLarge.copyWith(
-                        fontWeight: FontWeight.w400, letterSpacing: 0.5),
-                  ),
-                  TextSpan(
-                    text: 'PLAY',
-                    style: kTextStyleLarge.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xffBD4B4B),
-                        letterSpacing: 0.5),
-                  ),
-                ]),
+                  text: TextSpan(children: [
+                    TextSpan(
+                      text: 'Moveiiz',
+                      style: kTextStyleLarge.copyWith(
+                          fontWeight: FontWeight.w400, letterSpacing: 0.5),
+                    ),
+                    TextSpan(
+                      text: 'PLAY',
+                      style: kTextStyleLarge.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xffBD4B4B),
+                          letterSpacing: 0.5),
+                    ),
+                  ]),
                 ),
                 SizedBox(
                   height: 15.0,
@@ -89,17 +123,47 @@ class LandingScreen extends StatelessWidget {
                 SizedBox(
                   height: 30.0,
                 ),
-                ReusableButton(
-                  btnText: 'Get Started',
-                  btnColor: 0xFFBD4B4B,
-                  btnTextColor: 0xffEEEEEE,
-                  function: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AuthScreen(),
+                Container(
+                  width: double.infinity,
+                  height: 50.0,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _storedInfo();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                           builder: (context) => AuthScreen()
+                         /* builder: (context) => BottomNavy(user: widget.user)*/
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                      child: Text(
+                        'Get Started',
+                        textAlign: TextAlign.center,
+                        style: kTextStyleMedium.copyWith(
+                            fontSize: 18.0, color: Color(0xffEEEEEE)),
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                      elevation: 5.0,
+                      primary: Color(0xFFBD4B4B),
                     ),
                   ),
                 )
+             /*   ReusableButton(
+                  btnText: 'Get Started',
+                  btnColor: 0xFFBD4B4B,
+                  btnTextColor: 0xffEEEEEE,
+                  function: () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => AuthScreen(),
+                    ),
+                  ),
+                )*/
               ],
             ),
           ),

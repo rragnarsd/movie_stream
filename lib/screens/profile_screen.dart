@@ -20,18 +20,10 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  bool _isSigningOut = false;
-  late User _currentUser;
-
-  @override
-  void initState() {
-   _currentUser = widget.user;
-    super.initState();
-  }
 
   void signOutTheUser() async{
     await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AuthScreen()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LandingScreen()));
   }
 
   @override
@@ -43,37 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             children: [
               ProfileHeader(),
-          Column(
-            children: [
-              SizedBox(
-                height: 10.0,
-              ),
-              Text(
-                '${_currentUser.displayName}',
-               /* 'George Albert',*/
-                style: kTextStyleMedium.copyWith(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Text(
-                '${_currentUser.email}',
-                /*'georgealbert@gmail.com',*/
-                style: kTextStyleSmall.copyWith(
-                  fontSize: 16.0,
-                  color: Color(0xffEEEEEE),
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(
-                height: 40.0,
-              ),
-            ],
-          ),
-              /*ProfileAbout( ),*/
+              ProfileAbout(user: widget.user,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -97,22 +59,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(
                 height: 40.0,
               ),
-            /*  ProfileTile(
-                text: 'Notifications',
-              ),*/
               SizedBox(
                 height: 10.0,
               ),
-          Material(
-            child: InkWell(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: ListTile(
+              InkWell(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: ListTile(
                     tileColor: Color(0xff2d2f3c),
                     title: Text(
-                      'Sign Out',
+                      'Sign out',
                       style: TextStyle(
                         color: Color(0xffEEEEEE),
                         letterSpacing: 1.0,
@@ -123,13 +81,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Icons.chevron_right,
                       color: Color(0xffEEEEEE),
                     ),
-                    onTap: signOutTheUser,
-                    )),
+                    onTap: signOutTheUser
+                  ),
+                ),
               ),
-            ),
-             /* ProfileTile(
-                text: 'Sign Out',
-              ),*/
             ],
           ),
         ),
@@ -147,7 +102,13 @@ class ProfileAbout extends StatefulWidget {
 }
 
 class _ProfileAboutState extends State<ProfileAbout> {
-  bool _isSendingVerification = false;
+  late User _currentUser;
+
+  @override
+  void initState() {
+    _currentUser = widget.user;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +118,7 @@ class _ProfileAboutState extends State<ProfileAbout> {
           height: 10.0,
         ),
         Text(
-          'George Albert',
+          '${_currentUser.displayName}',
           style: kTextStyleMedium.copyWith(
             fontSize: 20.0,
             fontWeight: FontWeight.w400,
@@ -167,7 +128,7 @@ class _ProfileAboutState extends State<ProfileAbout> {
           height: 10.0,
         ),
         Text(
-          'georgealbert@gmail.com',
+          '${_currentUser.email}',
           style: kTextStyleSmall.copyWith(
             fontSize: 16.0,
             color: Color(0xffEEEEEE),
@@ -181,6 +142,7 @@ class _ProfileAboutState extends State<ProfileAbout> {
     );
   }
 }
+
 
 class ProfileHeader extends StatefulWidget {
   const ProfileHeader({Key? key}) : super(key: key);
@@ -238,42 +200,6 @@ class _ProfileHeaderState extends State<ProfileHeader>
   }
 }
 
-/*class ProfileTile extends StatelessWidget {
-  final String text;
-
-  ProfileTile({required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      child: InkWell(
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          child: ListTile(
-              tileColor: Color(0xff2d2f3c),
-              title: Text(
-                text,
-                style: TextStyle(
-                  color: Color(0xffEEEEEE),
-                  letterSpacing: 1.0,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              trailing: Icon(
-                Icons.chevron_right,
-                color: Color(0xffEEEEEE),
-              ),
-              onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LandingScreen()),
-                  )),
-        ),
-      ),
-    );
-  }
-}*/
 
 class ProfileCard extends StatelessWidget {
   final String text;
