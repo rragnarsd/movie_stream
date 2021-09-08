@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_stream/auth/fire_auth.dart';
 import 'package:movie_stream/auth/validator.dart';
-import 'package:movie_stream/bottomNavy.dart';
+import 'package:movie_stream/screens/bottomNavyScreen.dart';
 import 'package:movie_stream/widgets/logo_auth.dart';
 
 import '../widgets/reusable_btn.dart';

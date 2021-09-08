@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_stream/auth/fire_auth.dart';
 import 'package:movie_stream/auth/validator.dart';
-import 'package:movie_stream/bottomNavy.dart';
+import 'package:movie_stream/screens/bottomNavyScreen.dart';
 import 'package:movie_stream/screens/home_screen.dart';
 import 'package:movie_stream/screens/landing_screen.dart';
 import 'package:movie_stream/screens/profile_screen.dart';

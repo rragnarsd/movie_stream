@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'bottomNavy.dart';
+import 'screens/bottomNavyScreen.dart';
 
 int? notFirstTime;
 
