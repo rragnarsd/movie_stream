@@ -15,18 +15,23 @@
 - Shared_preferences - https://pub.dev/packages/shared_preferences
 - Responsive_framework - https://pub.dev/packages/responsive_framework
 
- ## I got inspired by these designs
-- https://dribbble.com/shots/5529233-Movie-App-Interface-Design-Dark-Theme
-- https://dribbble.com/shots/14379133-MoviesWatch-On-Demand-Entertainment-App-Cinema-Tv-Series?utm_source=pinterest&utm_campaign=pinterest_shot&utm_content=MoviesWatch+-+On-Demand+Entertainment+App+%28Cinema%2C+Tv%2C+Series%29&utm_medium=Social_Share<br>
-
 ## New Widgets that I tried
 - Futurebuilder... I like this one a lot!<br>
 - AnimatedBuilder<br>
 - Dismissible widget<br>
 - Transform.rotate<br>
 
+ ## I got inspired by these designs
+- https://dribbble.com/shots/5529233-Movie-App-Interface-Design-Dark-Theme
+- https://dribbble.com/shots/14379133-MoviesWatch-On-Demand-Entertainment-App-Cinema-Tv-Series?utm_source=pinterest&utm_campaign=pinterest_shot&utm_content=MoviesWatch+-+On-Demand+Entertainment+App+%28Cinema%2C+Tv%2C+Series%29&utm_medium=Social_Share<br>
+
+## Design
+- The images are from www.unsplash.com
+
 ## The color pallette that I used
 ![image](https://user-images.githubusercontent.com/44742460/132573409-3adc994f-52e1-459c-8675-2a79ab363a8f.png)
+
+
 
 
 
