@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:movie_stream/service/constants.dart';
 import 'package:movie_stream/models/movie_model.dart';
 import 'package:movie_stream/screens/favorite_screen.dart';
@@ -94,7 +93,6 @@ class MovieInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
     return Positioned(
       top: 240,
       left: 25,

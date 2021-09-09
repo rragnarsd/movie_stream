@@ -6,7 +6,7 @@ import 'package:movie_stream/auth/validator.dart';
 import 'package:movie_stream/screens/bottomNavyScreen.dart';
 import 'package:movie_stream/widgets/logo_auth.dart';
 
-import '../widgets/reusable_btn.dart';
+import '../style_constants.dart';
 
 class RegisterScreen extends StatefulWidget {
   final Function toggleAuth;
@@ -23,9 +23,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _passwordTextController = TextEditingController();
   final _nameTextController = TextEditingController();
 
-  final _focusEmail = FocusNode();
-  final _focusPassword = FocusNode();
-  final _focusName = FocusNode();
+  FocusNode _focusEmail = FocusNode();
+  FocusNode _focusPassword = FocusNode();
+  FocusNode _focusName = FocusNode();
+  FocusNode _focusSubmit = FocusNode();
 
   void togglePassword() {
     setState(() {
@@ -54,6 +55,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
             );
           });
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _focusEmail = FocusNode();
+    _focusPassword = FocusNode();
+    _focusName = FocusNode();
+    _focusSubmit = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _focusEmail.dispose();
+    _focusPassword.dispose();
+    _focusName.dispose();
+    _focusSubmit.dispose();
+    super.dispose();
   }
 
   @override
@@ -107,6 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               TextFormField(
                                 keyboardType: TextInputType.emailAddress,
+                                textInputAction: TextInputAction.next,
                                 controller: _emailTextController,
                                 focusNode: _focusEmail,
                                 validator: (value) => Validator.validateEmail(
@@ -126,6 +146,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         BorderSide(color: Colors.grey.shade400),
                                   ),
                                 ),
+                                onFieldSubmitted: (term) {
+                                  _focusEmail.unfocus();
+                                  FocusScope.of(context)
+                                      .requestFocus(_focusPassword);
+                                },
                               ),
                               SizedBox(
                                 height: 20.0,
@@ -133,6 +158,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               TextFormField(
                                 obscureText: _isHidden,
                                 keyboardType: TextInputType.number,
+                                textInputAction: TextInputAction.next,
                                 controller: _passwordTextController,
                                 focusNode: _focusPassword,
                                 validator: (value) =>
@@ -145,7 +171,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   suffixIcon: InkWell(
                                     child: Icon(_isHidden
                                         ? Icons.visibility_off
-                                        : Icons.visibility),
+                                        : Icons.visibility,
+                                    ),
                                     onTap: togglePassword,
                                   ),
                                   filled: true,
@@ -160,6 +187,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ),
                                   ),
                                 ),
+                                onFieldSubmitted: (term) {
+                                  _focusPassword.unfocus();
+                                  FocusScope.of(context).requestFocus(_focusName);
+                                },
                               ),
                               SizedBox(
                                 height: 20.0,
@@ -167,6 +198,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               TextFormField(
                                 keyboardType: TextInputType.name,
                                 controller: _nameTextController,
+                                textInputAction: TextInputAction.done,
                                 focusNode: _focusName,
                                 validator: (value) => Validator.validateName(
                                     name: _nameTextController.text),
@@ -185,15 +217,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         BorderSide(color: Colors.grey.shade400),
                                   ),
                                 ),
+                                onFieldSubmitted: (term) {
+                                  _focusName.unfocus();
+                                  FocusScope.of(context).requestFocus(_focusSubmit);
+                                },
                               ),
                               SizedBox(
                                 height: 20.0,
                               ),
-                              ReusableButton(
-                                btnText: 'Register',
-                                btnColor: 0xFFBD4B4B,
-                                btnTextColor: 0xffEEEEEE,
-                                function: _submitRegisterForm,
+                              Container(
+                                width: double.infinity,
+                                height: 50.0,
+                                child: ElevatedButton(
+                                  focusNode: _focusSubmit,
+                                  onPressed: () => _submitRegisterForm,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 5.0,
+                                    ),
+                                    child: Text(
+                                      'Register',
+                                      textAlign: TextAlign.center,
+                                      style: kTextStyleMedium.copyWith(
+                                          fontSize: 18.0,
+                                          color: Color(0xffEEEEEE)),
+                                    ),
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.zero,
+                                    ),
+                                    elevation: 5.0,
+                                    primary: Color(0xFFBD4B4B),
+                                  ),
+                                ),
                               ),
                               SizedBox(
                                 height: 20.0,

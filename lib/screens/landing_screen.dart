@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_stream/auth/auth_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:movie_stream/widgets/reusable_btn.dart';
 
 import '../style_constants.dart';
 
@@ -14,27 +14,6 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-  int currentIndex = 0;
-  late PageController _pageController;
-
-  @override
-  void initState() {
-    _pageController = PageController(initialPage: 0);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-
-  _storedInfo() async {
-    int isViewed = 0;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('landingScreen', isViewed);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -115,33 +94,13 @@ class _LandingScreenState extends State<LandingScreen> {
                 SizedBox(
                   height: 30.0,
                 ),
-                Container(
-                  width: double.infinity,
-                  height: 50.0,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _storedInfo();
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                           builder: (context) => AuthScreen()
-                        ),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5.0),
-                      child: Text(
-                        'Get Started',
-                        textAlign: TextAlign.center,
-                        style: kTextStyleMedium.copyWith(
-                            fontSize: 18.0, color: Color(0xffEEEEEE)),
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-                      elevation: 5.0,
-                      primary: Color(0xFFBD4B4B),
-                    ),
+                ReusableButton(
+                  btnText: 'Get Started',
+                  btnTextColor: 0xffEEEEEE,
+                  btnColor: 0xFFBD4B4B,
+                  function: () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => AuthScreen()),
                   ),
                 )
               ],

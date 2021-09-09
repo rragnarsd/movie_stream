@@ -1,4 +1,3 @@
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,12 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:movie_stream/auth/fire_auth.dart';
 import 'package:movie_stream/auth/validator.dart';
 import 'package:movie_stream/screens/bottomNavyScreen.dart';
-import 'package:movie_stream/screens/home_screen.dart';
-import 'package:movie_stream/screens/landing_screen.dart';
-import 'package:movie_stream/screens/profile_screen.dart';
 import 'package:movie_stream/widgets/logo_auth.dart';
-import 'package:movie_stream/widgets/movie_tabs_category.dart';
-import 'package:movie_stream/widgets/reusable_btn.dart';
+
+import '../style_constants.dart';
 
 class LoginScreen extends StatefulWidget {
   final Function toggleAuth;
@@ -23,13 +19,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  Color _colorText = Colors.black54;
   bool _isHidden = true;
   final _loginFormKey = GlobalKey<FormState>();
   final _emailTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
 
-  final _focusEmail = FocusNode();
-  final _focusPassword = FocusNode();
+
+  FocusNode _focusEmail = FocusNode();
+  FocusNode _focusPassword = FocusNode();
+  FocusNode _focusSubmit = FocusNode();
 
   //Check if the user is signed in
   Future<FirebaseApp> _initializeFirebase() async {
@@ -48,24 +47,44 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _focusEmail = FocusNode();
+    _focusPassword = FocusNode();
+    _focusSubmit = FocusNode();
+    setState(() {
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusEmail.dispose();
+    _focusPassword.dispose();
+    _focusSubmit.dispose();
+    super.dispose();
+  }
+
   void _submitLoginForm() async {
-      if (_loginFormKey.currentState!.validate()) {
-        User? user = await FireAuth.signInUsingEmailPassword(
-            email: _emailTextController.text,
-            password: _passwordTextController.text,
-            context: context);
-        if (user != null) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => BottomNavy(user: user),
-            ),
-          );
-        }
+    if (_loginFormKey.currentState!.validate()) {
+      User? user = await FireAuth.signInUsingEmailPassword(
+          email: _emailTextController.text,
+          password: _passwordTextController.text,
+          context: context);
+      if (user != null) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => BottomNavy(user: user),
+          ),
+        );
       }
     }
+  }
 
   @override
   Widget build(BuildContext context) {
+/*   const _focusColor = Color(0xFFBD4B4B);
+   const _defaultColor = Colors.black54;*/
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -118,15 +137,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                   children: [
                                     TextFormField(
                                       keyboardType: TextInputType.emailAddress,
+                                      textInputAction: TextInputAction.next,
                                       controller: _emailTextController,
                                       focusNode: _focusEmail,
+                                      autofocus: true,
                                       validator: (value) =>
                                           Validator.validateEmail(
-                                              email: _emailTextController.text),
+                                              email: _emailTextController.text,
+                                          ),
                                       decoration: InputDecoration(
                                         contentPadding: EdgeInsets.all(20.0),
                                         hintText: 'Email',
-                                        prefixIcon: Icon(Icons.mail),
+                                        hintStyle: TextStyle(color: _colorText),
+                                        prefixIcon: Icon(Icons.lock,  color: _focusEmail.hasFocus ? Colors.red : Colors.grey),
                                         filled: true,
                                         enabledBorder: UnderlineInputBorder(
                                           borderRadius:
@@ -141,6 +164,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                           ),
                                         ),
                                       ),
+                                      onFieldSubmitted: (term) {
+                                        _focusEmail.unfocus();
+                                        FocusScope.of(context)
+                                            .requestFocus(_focusPassword);
+                                      },
                                     ),
                                     SizedBox(
                                       height: 20.0,
@@ -148,20 +176,24 @@ class _LoginScreenState extends State<LoginScreen> {
                                     TextFormField(
                                       obscureText: _isHidden,
                                       keyboardType: TextInputType.number,
+                                      textInputAction: TextInputAction.done,
                                       controller: _passwordTextController,
                                       focusNode: _focusPassword,
                                       validator: (value) =>
                                           Validator.validatePassword(
                                               password:
-                                                  _passwordTextController.text),
+                                                  _passwordTextController.text,
+                                          ),
                                       decoration: InputDecoration(
                                         contentPadding: EdgeInsets.all(20.0),
                                         hintText: 'Password',
-                                        prefixIcon: Icon(Icons.lock),
+                                        prefixIcon: Icon(Icons.lock,  color: _focusPassword.hasFocus ? Color(0xFFBD4B4B) : Colors.grey),
                                         suffixIcon: InkWell(
-                                          child: Icon(_isHidden
-                                              ? Icons.visibility_off
-                                              : Icons.visibility),
+                                          child: Icon(
+                                            _isHidden
+                                                ? Icons.visibility_off
+                                                : Icons.visibility, color: _focusPassword.hasFocus ? Color(0xFFBD4B4B) : Colors.grey
+                                          ),
                                           onTap: togglePassword,
                                         ),
                                         filled: true,
@@ -178,6 +210,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                           ),
                                         ),
                                       ),
+                                      onFieldSubmitted: (term) {
+                                        _focusPassword.unfocus();
+                                        FocusScope.of(context).requestFocus(_focusSubmit);
+                                      },
                                     ),
                                     SizedBox(
                                       height: 20.0,
@@ -192,11 +228,32 @@ class _LoginScreenState extends State<LoginScreen> {
                                     SizedBox(
                                       height: 20.0,
                                     ),
-                                    ReusableButton(
-                                      btnText: 'Login',
-                                      btnColor: 0xFFBD4B4B,
-                                      btnTextColor: 0xffEEEEEE,
-                                      function: _submitLoginForm,
+                                    Container(
+                                      width: double.infinity,
+                                      height: 50.0,
+                                      child: ElevatedButton(
+                                        focusNode: _focusSubmit,
+                                        onPressed: () => _submitLoginForm,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5.0,
+                                          ),
+                                          child: Text(
+                                            'Login',
+                                            textAlign: TextAlign.center,
+                                            style: kTextStyleMedium.copyWith(
+                                                fontSize: 18.0,
+                                                color: Color(0xffEEEEEE)),
+                                          ),
+                                        ),
+                                        style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.zero,
+                                          ),
+                                          elevation: 5.0,
+                                          primary: Color(0xFFBD4B4B),
+                                        ),
+                                      ),
                                     ),
                                     SizedBox(
                                       height: 20.0,
