@@ -1,7 +1,11 @@
 # MovieStream
 
 ## About
-- 
+- The application is composed by LandingScreen, AuthScreen and BottomNavyScreen, which also has other nested screens. 
+- At the top of the Homepage (tab 1), there is a movie trailer which comes from the youtube_package, as well as two rows displaying movies from the API. Each movie has a poster and a title section, and when a user clicks on the desired poster image/title, the data will be sent to another screen. On that screen, the user will see further information on the selected poster.
+- At the top of the Explorepage (tab 2), the user has the option to choose from three different movie categories. The body of that page has a Listview.builder that loads data from the API. Each item from the list has a container that displays information from the API as well as an option to add movies to favorites. 
+- At the top of the Profilepage (tab 3), there is an Animated Circle that spins around with Transform.rotate. Inside the circle there is an CircleAvatar that displays an image of the user, as well as information about the user.
+- In the center the user has the option to click on three different cards that all navigate to other screens. The first is a <em>favorite list</em>, the second a <em>history (watched movies)</em> list and third is a <em>reviews list</em> which will be hard coded dummy text for reviews. Finally at the bottom is a sign out button.
 
 ## Packages
 - Http - https://pub.dev/packages/http
