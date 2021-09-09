@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'dart:math' as math;
 import 'package:movie_stream/screens/favorite_screen.dart';
 import 'package:movie_stream/screens/landing_screen.dart';
@@ -19,10 +21,10 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
-  void signOutTheUser() async{
+  void signOutTheUser() async {
     await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LandingScreen()));
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => LandingScreen()));
   }
 
   @override
@@ -36,7 +38,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               children: [
                 ProfileHeader(),
-                ProfileAbout(user: widget.user,),
+                ProfileAbout(
+                  user: widget.user,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -69,21 +73,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: ListTile(
-                      tileColor: Color(0xff2d2f3c),
-                      title: Text(
-                        'Sign out',
-                        style: TextStyle(
-                          color: Color(0xffEEEEEE),
-                          letterSpacing: 1.0,
-                          fontWeight: FontWeight.w400,
+                        tileColor: Color(0xff2d2f3c),
+                        title: Text(
+                          'Sign out',
+                          style: TextStyle(
+                            color: Color(0xffEEEEEE),
+                            letterSpacing: 1.0,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
-                      ),
-                      trailing: Icon(
-                        Icons.chevron_right,
-                        color: Color(0xffEEEEEE),
-                      ),
-                      onTap: signOutTheUser
-                    ),
+                        trailing: Icon(
+                          Icons.chevron_right,
+                          color: Color(0xffEEEEEE),
+                        ),
+                        onTap: signOutTheUser),
                   ),
                 ),
               ],
@@ -145,7 +148,6 @@ class _ProfileAboutState extends State<ProfileAbout> {
   }
 }
 
-
 class ProfileHeader extends StatefulWidget {
   const ProfileHeader({Key? key}) : super(key: key);
 
@@ -198,10 +200,48 @@ class _ProfileHeaderState extends State<ProfileHeader>
           ),
         ),
       ),
+      Positioned(
+        right: 130.0,
+        top: 80.0,
+        child: AnimatedBuilder(
+          animation: _controller,
+          builder: (BuildContext context, child) {
+            return Transform.rotate(
+              angle: _controller.value * 0.02 * math.pi,
+              child: child,
+            );
+          },
+          child: IconButton(
+            icon: ShaderMask(
+              blendMode: BlendMode.srcATop,
+              shaderCallback: (Rect bounds) {
+                return LinearGradient(
+                        colors: [
+                      Color(0xFFBD4B4B),
+                      Color(0xFFEEEEEE),
+                    ],
+                        tileMode: TileMode.mirror,
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                )
+                    .createShader(bounds);
+              },
+              child: Icon(
+                Icons.photo_camera,
+                size: 35.0,
+              ),
+            ),
+            onPressed: () async {
+              await ImagePicker.platform.pickImage(source: ImageSource.gallery);
+              //Upload the image to firebase
+              /* locator.get<UserInfo>().uploadProfilePicture();*/
+            },
+          ),
+        ),
+      )
     ]);
   }
 }
-
 
 class ProfileCard extends StatelessWidget {
   final String text;

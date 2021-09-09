@@ -6,8 +6,8 @@ import 'package:movie_stream/auth/fire_auth.dart';
 import 'package:movie_stream/auth/validator.dart';
 import 'package:movie_stream/screens/bottomNavyScreen.dart';
 import 'package:movie_stream/widgets/logo_auth.dart';
+import 'package:movie_stream/widgets/reusable_btn.dart';
 
-import '../style_constants.dart';
 
 class LoginScreen extends StatefulWidget {
   final Function toggleAuth;
@@ -25,10 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
 
-
   FocusNode _focusEmail = FocusNode();
   FocusNode _focusPassword = FocusNode();
-  FocusNode _focusSubmit = FocusNode();
 
   //Check if the user is signed in
   Future<FirebaseApp> _initializeFirebase() async {
@@ -52,16 +50,12 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     _focusEmail = FocusNode();
     _focusPassword = FocusNode();
-    _focusSubmit = FocusNode();
-    setState(() {
-    });
   }
 
   @override
   void dispose() {
     _focusEmail.dispose();
     _focusPassword.dispose();
-    _focusSubmit.dispose();
     super.dispose();
   }
 
@@ -83,8 +77,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-/*   const _focusColor = Color(0xFFBD4B4B);
-   const _defaultColor = Colors.black54;*/
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -100,202 +92,190 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         resizeToAvoidBottomInset: false,
-        body: FutureBuilder(
-          future: _initializeFirebase(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Stack(
-                    children: [
-                      Container(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                  ),
+                ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 20.0,
+                      horizontal: 20.0,
+                    ),
+                    child: Form(
+                      key: _loginFormKey,
+                      child: Container(
+                        height: 400,
                         decoration: BoxDecoration(
-                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.white,
                         ),
-                      ),
-                      Center(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                            vertical: 20.0,
                             horizontal: 20.0,
                           ),
-                          child: Form(
-                            key: _loginFormKey,
-                            child: Container(
-                              height: 400,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.white,
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20.0,
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    TextFormField(
-                                      keyboardType: TextInputType.emailAddress,
-                                      textInputAction: TextInputAction.next,
-                                      controller: _emailTextController,
-                                      focusNode: _focusEmail,
-                                      autofocus: true,
-                                      validator: (value) =>
-                                          Validator.validateEmail(
-                                              email: _emailTextController.text,
-                                          ),
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.all(20.0),
-                                        hintText: 'Email',
-                                        hintStyle: TextStyle(color: _colorText),
-                                        prefixIcon: Icon(Icons.lock,  color: _focusEmail.hasFocus ? Colors.red : Colors.grey),
-                                        filled: true,
-                                        enabledBorder: UnderlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: BorderSide.none,
+                          child: FutureBuilder(
+                              future: _initializeFirebase(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  return Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextFormField(
+                                        keyboardType:
+                                            TextInputType.emailAddress,
+                                        textInputAction: TextInputAction.next,
+                                        controller: _emailTextController,
+                                        focusNode: _focusEmail,
+                                        validator: (value) =>
+                                            Validator.validateEmail(
+                                          email: _emailTextController.text,
                                         ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: BorderSide(
-                                            color: Colors.grey.shade400,
+                                        decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.all(20.0),
+                                          hintText: 'Email',
+                                          hintStyle:
+                                              TextStyle(color: _colorText),
+                                          prefixIcon: Icon(
+                                            Icons.lock,
+                                            color: Theme.of(context)
+                                                .iconTheme
+                                                .color,
                                           ),
-                                        ),
-                                      ),
-                                      onFieldSubmitted: (term) {
-                                        _focusEmail.unfocus();
-                                        FocusScope.of(context)
-                                            .requestFocus(_focusPassword);
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 20.0,
-                                    ),
-                                    TextFormField(
-                                      obscureText: _isHidden,
-                                      keyboardType: TextInputType.number,
-                                      textInputAction: TextInputAction.done,
-                                      controller: _passwordTextController,
-                                      focusNode: _focusPassword,
-                                      validator: (value) =>
-                                          Validator.validatePassword(
-                                              password:
-                                                  _passwordTextController.text,
+                                          filled: true,
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: BorderSide.none,
                                           ),
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.all(20.0),
-                                        hintText: 'Password',
-                                        prefixIcon: Icon(Icons.lock,  color: _focusPassword.hasFocus ? Color(0xFFBD4B4B) : Colors.grey),
-                                        suffixIcon: InkWell(
-                                          child: Icon(
-                                            _isHidden
-                                                ? Icons.visibility_off
-                                                : Icons.visibility, color: _focusPassword.hasFocus ? Color(0xFFBD4B4B) : Colors.grey
-                                          ),
-                                          onTap: togglePassword,
-                                        ),
-                                        filled: true,
-                                        enabledBorder: UnderlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: BorderSide.none,
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: BorderSide(
-                                            color: Colors.grey.shade400,
-                                          ),
-                                        ),
-                                      ),
-                                      onFieldSubmitted: (term) {
-                                        _focusPassword.unfocus();
-                                        FocusScope.of(context).requestFocus(_focusSubmit);
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 20.0,
-                                    ),
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: InkWell(
-                                        child: Text('Forgot your password?'),
-                                        onTap: () {},
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20.0,
-                                    ),
-                                    Container(
-                                      width: double.infinity,
-                                      height: 50.0,
-                                      child: ElevatedButton(
-                                        focusNode: _focusSubmit,
-                                        onPressed: () => _submitLoginForm,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 5.0,
-                                          ),
-                                          child: Text(
-                                            'Login',
-                                            textAlign: TextAlign.center,
-                                            style: kTextStyleMedium.copyWith(
-                                                fontSize: 18.0,
-                                                color: Color(0xffEEEEEE)),
-                                          ),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.zero,
-                                          ),
-                                          elevation: 5.0,
-                                          primary: Color(0xFFBD4B4B),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20.0,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text('Don\'t have an account?'),
-                                        SizedBox(
-                                          width: 5.0,
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            widget.toggleAuth();
-                                          },
-                                          child: Text(
-                                            'Register',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w600,
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: BorderSide(
+                                              color: Colors.grey.shade400,
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
+                                        onFieldSubmitted: (term) {
+                                          _focusEmail.unfocus();
+                                          FocusScope.of(context)
+                                              .requestFocus(_focusPassword);
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 20.0,
+                                      ),
+                                      TextFormField(
+                                        obscureText: _isHidden,
+                                        keyboardType: TextInputType.number,
+                                        textInputAction: TextInputAction.done,
+                                        controller: _passwordTextController,
+                                        focusNode: _focusPassword,
+                                        validator: (value) =>
+                                            Validator.validatePassword(
+                                          password:
+                                              _passwordTextController.text,
+                                        ),
+                                        decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.all(20.0),
+                                          hintText: 'Password',
+                                          prefixIcon: Icon(Icons.lock,
+                                              color: Theme.of(context)
+                                                  .iconTheme
+                                                  .color),
+                                          suffixIcon: GestureDetector(
+                                            onTap: togglePassword,
+                                            child: Icon(
+                                                _isHidden
+                                                    ? Icons.visibility_off
+                                                    : Icons.visibility,
+                                                color: Theme.of(context)
+                                                    .iconTheme
+                                                    .color),
+                                          ),
+                                          filled: true,
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: BorderSide.none,
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: BorderSide(
+                                              color: Colors.grey.shade400,
+                                            ),
+                                          ),
+                                        ),
+                                        onFieldSubmitted: (term) {
+                                          _focusPassword.unfocus();
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 20.0,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: InkWell(
+                                          child: Text('Forgot your password?'),
+                                          onTap: () {},
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 20.0,
+                                      ),
+                                      ReusableButton(
+                                          btnText: 'Login',
+                                          btnColor: 0xFFBD4B4B,
+                                          btnTextColor: 0xffEEEEEE,
+                                          function: _submitLoginForm),
+                                      SizedBox(
+                                        height: 20.0,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text('Don\'t have an account?'),
+                                          SizedBox(
+                                            width: 5.0,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              widget.toggleAuth();
+                                            },
+                                            child: Text(
+                                              'Register',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  );
+                                }
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }),
                         ),
                       ),
-                      LogoAuth(),
-                    ],
+                    ),
                   ),
-                ],
-              );
-            }
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          },
+                ),
+                LogoAuth(),
+              ],
+            ),
+          ],
         ),
       ),
     );

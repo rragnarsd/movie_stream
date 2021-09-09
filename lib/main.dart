@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           splashColor: Color(0xFFEFB7B7),
           buttonColor: Color(0xFFBD4B4B),
           textTheme: TextTheme(subtitle2: TextStyle(color: Colors.green)),
-          iconTheme: IconThemeData(color: Color(0xFFEEEEEE)),
+          iconTheme: IconThemeData(color: Color(0xFFBD4B4B)),
         ),
         home: Scaffold(
           body: LandingScreen(),

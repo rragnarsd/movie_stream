@@ -5,8 +5,7 @@ import 'package:movie_stream/auth/fire_auth.dart';
 import 'package:movie_stream/auth/validator.dart';
 import 'package:movie_stream/screens/bottomNavyScreen.dart';
 import 'package:movie_stream/widgets/logo_auth.dart';
-
-import '../style_constants.dart';
+import 'package:movie_stream/widgets/reusable_btn.dart';
 
 class RegisterScreen extends StatefulWidget {
   final Function toggleAuth;
@@ -26,7 +25,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   FocusNode _focusEmail = FocusNode();
   FocusNode _focusPassword = FocusNode();
   FocusNode _focusName = FocusNode();
-  FocusNode _focusSubmit = FocusNode();
 
   void togglePassword() {
     setState(() {
@@ -63,7 +61,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _focusEmail = FocusNode();
     _focusPassword = FocusNode();
     _focusName = FocusNode();
-    _focusSubmit = FocusNode();
   }
 
   @override
@@ -71,7 +68,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _focusEmail.dispose();
     _focusPassword.dispose();
     _focusName.dispose();
-    _focusSubmit.dispose();
     super.dispose();
   }
 
@@ -134,7 +130,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(20.0),
                                   hintText: 'Email',
-                                  prefixIcon: Icon(Icons.mail),
+                                  prefixIcon: Icon(Icons.mail, color: Theme.of(context).iconTheme.color),
                                   filled: true,
                                   enabledBorder: UnderlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
@@ -158,30 +154,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               TextFormField(
                                 obscureText: _isHidden,
                                 keyboardType: TextInputType.number,
-                                textInputAction: TextInputAction.next,
+                                textInputAction: TextInputAction.done,
                                 controller: _passwordTextController,
                                 focusNode: _focusPassword,
                                 validator: (value) =>
                                     Validator.validatePassword(
-                                        password: _passwordTextController.text),
+                                      password:
+                                      _passwordTextController.text,
+                                    ),
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(20.0),
                                   hintText: 'Password',
-                                  prefixIcon: Icon(Icons.lock),
-                                  suffixIcon: InkWell(
-                                    child: Icon(_isHidden
-                                        ? Icons.visibility_off
-                                        : Icons.visibility,
-                                    ),
+                                  prefixIcon: Icon(Icons.lock, color: Theme.of(context).iconTheme.color),
+                                  suffixIcon: GestureDetector(
                                     onTap: togglePassword,
+                                    child: Icon(
+                                      _isHidden
+                                          ? Icons.visibility_off
+                                          : Icons.visibility, color: Theme.of(context).iconTheme.color
+                                    ),
                                   ),
                                   filled: true,
                                   enabledBorder: UnderlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius:
+                                    BorderRadius.circular(10),
                                     borderSide: BorderSide.none,
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius:
+                                    BorderRadius.circular(10),
                                     borderSide: BorderSide(
                                       color: Colors.grey.shade400,
                                     ),
@@ -189,7 +190,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 onFieldSubmitted: (term) {
                                   _focusPassword.unfocus();
-                                  FocusScope.of(context).requestFocus(_focusName);
                                 },
                               ),
                               SizedBox(
@@ -205,7 +205,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(20.0),
                                   hintText: 'Full Name',
-                                  prefixIcon: Icon(Icons.person),
+                                  prefixIcon: Icon(Icons.person, color: Theme.of(context).iconTheme.color),
                                   filled: true,
                                   enabledBorder: UnderlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
@@ -219,39 +219,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 onFieldSubmitted: (term) {
                                   _focusName.unfocus();
-                                  FocusScope.of(context).requestFocus(_focusSubmit);
                                 },
                               ),
                               SizedBox(
                                 height: 20.0,
                               ),
-                              Container(
-                                width: double.infinity,
-                                height: 50.0,
-                                child: ElevatedButton(
-                                  focusNode: _focusSubmit,
-                                  onPressed: () => _submitRegisterForm,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 5.0,
-                                    ),
-                                    child: Text(
-                                      'Register',
-                                      textAlign: TextAlign.center,
-                                      style: kTextStyleMedium.copyWith(
-                                          fontSize: 18.0,
-                                          color: Color(0xffEEEEEE)),
-                                    ),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.zero,
-                                    ),
-                                    elevation: 5.0,
-                                    primary: Color(0xFFBD4B4B),
-                                  ),
-                                ),
-                              ),
+                              ReusableButton(
+                                  btnText: 'Register',
+                                  btnColor: 0xFFBD4B4B,
+                                  btnTextColor: 0xffEEEEEE,
+                                  function: _submitRegisterForm),
                               SizedBox(
                                 height: 20.0,
                               ),
