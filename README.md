@@ -1,3 +1,4 @@
+
 # MovieStream
 
 ## About
@@ -35,7 +36,12 @@
 ## The color pallette that I used
 ![image](https://user-images.githubusercontent.com/44742460/132573409-3adc994f-52e1-459c-8675-2a79ab363a8f.png)
 
+## Screenshot
+![Draft 1 - Moviiez (1)](https://user-images.githubusercontent.com/44742460/132994287-5c1c8c3a-1783-472a-a06f-3943e0d452ca.png)
 
+
+## Live preview
+https://user-images.githubusercontent.com/44742460/132994143-b2df7475-070c-480c-8dce-ba4afe1a6c5f.mp4
 
 
 
