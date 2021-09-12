@@ -6,8 +6,6 @@ import 'package:movie_stream/screens/landing_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-int? notFirstTime;
-
 void main() async {
   await dotenv.load(fileName: ".env");
   runApp(
@@ -40,6 +38,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(0xFFBD4B4B),
           accentColor: Color(0xFFBD4B4B),
           splashColor: Color(0xFFEFB7B7),
+          cardColor: Color(0xFFEEEEEE),
           buttonColor: Color(0xFFBD4B4B),
           textTheme: TextTheme(subtitle2: TextStyle(color: Colors.green)),
           iconTheme: IconThemeData(color: Color(0xFFBD4B4B)),

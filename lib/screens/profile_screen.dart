@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:math' as math;
 import 'package:movie_stream/screens/favorite_screen.dart';
@@ -160,9 +159,8 @@ class ProfileHeader extends StatefulWidget {
 
 class _ProfileHeaderState extends State<ProfileHeader>
     with TickerProviderStateMixin {
-
-  final ImagePicker _picker = ImagePicker();
-  late File imageFile;
+  var profileImage;
+  late PickedFile imageFile;
 
   late final AnimationController _controller =
       AnimationController(vsync: this, duration: const Duration(seconds: 3))
@@ -174,15 +172,12 @@ class _ProfileHeaderState extends State<ProfileHeader>
     super.dispose();
   }
 
-  var image;
   void getImage() async {
-    PickedFile? picked = (await ImagePicker().pickImage(
-        source: ImageSource.gallery)) as PickedFile?;
+    XFile? picked = await ImagePicker().pickImage(source: ImageSource.gallery);
     setState(() {
-      image = File(picked!.path);
+      profileImage = File(picked!.path);
     });
   }
-
 
   Widget build(BuildContext context) {
     return Stack(children: [
@@ -208,13 +203,28 @@ class _ProfileHeaderState extends State<ProfileHeader>
         },
       ),
       Center(
-        child: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: CircleAvatar(
-            radius: 60.0,
-          /*  backgroundImage: image != null ? Image.file(image) : NetworkImage('https://images.unsplash.com/photo-1628191136272-08f5d3d9a6c0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1651&q=80') as ImageProvider*/
-          ),
-        ),
+        child: profileImage != null
+            ? Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: CircleAvatar(
+                  radius: 60.0,
+                  child: ClipOval(
+                    child: Image.file(
+                      profileImage,
+                      fit: BoxFit.cover,
+                      width: 120.0,
+                      height: 120.0,
+                    ),
+                  ),
+                ),
+              )
+            : Container(
+                padding: EdgeInsets.all(50.0),
+                alignment: Alignment.center,
+                child: Text(
+                  'Choose Image',
+                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+                )),
       ),
       Positioned(
         right: 130.0,
@@ -227,26 +237,21 @@ class _ProfileHeaderState extends State<ProfileHeader>
               child: child,
             );
           },
-          child: IconButton(
-            icon: ShaderMask(
-              blendMode: BlendMode.srcATop,
-              shaderCallback: (Rect bounds) {
-                return LinearGradient(
-                  colors: [
-                    Color(0xFFBD4B4B),
-                    Color(0xFFEEEEEE),
-                  ],
-                  tileMode: TileMode.mirror,
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ).createShader(bounds);
-              },
+          child: InkWell(
+            onTap: getImage,
+            child: Container(
+              width: 40.0,
+              height: 40.0,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Theme.of(context).scaffoldBackgroundColor,
+              ),
               child: Icon(
                 Icons.photo_camera,
-                size: 35.0,
+                size: 30.0,
+                color: Theme.of(context).cardColor,
               ),
             ),
-            onPressed: () => getImage()
           ),
         ),
       )

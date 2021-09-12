@@ -22,7 +22,7 @@ class _WatchedScreenState extends State<WatchedScreen> {
   @override
   void initState() {
     super.initState();
-    jsonData = fetchWatched();
+    jsonData = MovieModel().fetchWatched();
   }
 
   @override

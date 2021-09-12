@@ -35,5 +35,4 @@ class MovieProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
 }

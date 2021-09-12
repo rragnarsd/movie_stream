@@ -20,6 +20,4 @@ class MovieEntity extends Equatable {
   @override
   List<Object> get props => [id, title];
 
-/*  @override
-  bool get stringify => true;*/
 }

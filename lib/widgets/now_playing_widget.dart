@@ -21,7 +21,7 @@ class _GetLatestWidgetState extends State<GetLatestWidget> {
   @override
   void initState() {
     super.initState();
-    jsonData = fetchNowPlaying();
+    jsonData = MovieModel().fetchNowPlaying();
   }
 
   @override

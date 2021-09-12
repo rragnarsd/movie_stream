@@ -19,7 +19,7 @@ class _TopRatedMoviesState extends State<TopRatedMovies> {
   @override
   void initState() {
     super.initState();
-    jsonData = fetchTopRatedMovies();
+    jsonData = MovieModel().fetchTopRatedMovies();
   }
 
   @override

@@ -22,7 +22,7 @@ class _GetLatestState extends State<GetLatest> {
   @override
   void initState() {
     super.initState();
-    jsonData = fetchTopRatedMovies();
+    jsonData = MovieModel().fetchTopRatedMovies();
   }
 
   @override

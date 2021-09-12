@@ -19,7 +19,7 @@ class _ComingSoonState extends State<ComingSoon> {
   @override
   void initState() {
     super.initState();
-    jsonData = fetchUpComingMovies();
+    jsonData = MovieModel().fetchUpComingMovies();
   }
 
   @override

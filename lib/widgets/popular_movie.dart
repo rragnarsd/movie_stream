@@ -18,7 +18,7 @@ class _PopularMoviesState extends State<PopularMovies> {
   @override
   void initState() {
     super.initState();
-    jsonData = fetchPopularMovies();
+    jsonData = MovieModel().fetchPopularMovies();
   }
 
   @override
